@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "shippost",
   "version": "${version}",
-
   "name": "The Shippost Mod",
   "description": "Just a normal mod dont worry!",
   "authors": [
@@ -15,19 +14,19 @@
   },
 
   "license": "MIT",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/shippost/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
       {
         "adapter": "kotlin",
-        "value": "net.fabricmc.example.ExampleMod"
+        "value": "org.teamvoided.shippost.TheShippostMod"
       }
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "shippost.mixins.json"
   ],
 
   "depends": {
