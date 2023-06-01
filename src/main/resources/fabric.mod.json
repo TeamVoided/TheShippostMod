@@ -1,19 +1,20 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "shippost",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "The Shippost Mod",
+  "description": "Just a normal mod dont worry!",
   "authors": [
-    "Me!"
+    "Ender",
+    "Astra"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/modid/icon.png",
 
   "environment": "*",
