@@ -4,7 +4,7 @@ plugins {
     `maven-publish`
     java
 }
-
+val modid = "shippost"
 group = property("maven_group")!!
 version = property("mod_version")!!
 
@@ -20,6 +20,33 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_api_version")}")
 }
 
+
+loom {
+    runs {
+        //
+        // This adds a new gradle task that runs the datagen API: "gradlew runDatagenClient"
+        //
+
+        create("data") {
+            client()
+            configName = "Fabric Data"
+            ideConfigGenerated(true)
+            vmArg("-Dfabric-api.datagen")
+            vmArg("-Dfabric-api.datagen.output-dir=${file("src/main/generated")}")
+            vmArg("-Dfabric-api.datagen.modid=${modid}")
+            runDir("build/datagen")
+        }
+
+        create("TestWorld") {
+            client()
+            configName = "TestWorld"
+            ideConfigGenerated(true)
+            vmArg("-quickPlaySingleplayer \"Test\"")
+            runDir("run")
+        }
+
+    }
+}
 tasks {
 
     processResources {
@@ -64,7 +91,6 @@ java {
     // If you remove this line, sources will not be generated.
     withSourcesJar()
 }
-
 
 
 // configure the maven publication

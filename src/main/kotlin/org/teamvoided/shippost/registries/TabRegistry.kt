@@ -19,7 +19,7 @@ object TabRegistry {
             FabricItemGroup.builder()
                 .icon { ItemRegistry.TEST.defaultStack }
                 .displayName(Text.of("Your mother+"))
-                .entries { displayContext, entries ->
+                .entries { _, entries ->
                     entries.addAll(ItemRegistry.ITEM_LIST)
                 }.build()
         )
