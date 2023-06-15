@@ -39,7 +39,7 @@ loom {
 
         create("TestWorld") {
             client()
-            configName = "TestWorld"
+            configName = "Run Test World"
             ideConfigGenerated(true)
             vmArg("-quickPlaySingleplayer \"Test\"")
             runDir("run")

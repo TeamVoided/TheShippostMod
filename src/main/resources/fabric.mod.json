@@ -23,6 +23,12 @@
         "adapter": "kotlin",
         "value": "org.teamvoided.shippost.TheShippostMod"
       }
+    ],
+    "fabric-datagen": [
+      {
+        "adapter": "kotlin",
+        "value": "org.teamvoided.shippost.TheShippostData"
+      }
     ]
   },
   "mixins": [
@@ -38,5 +44,10 @@
   },
   "suggests": {
     "another-mod": "*"
+  },
+  "modmenu": {
+    "links": {
+      "modmenu.discord": "https://discord.gg/KZ5Q364hEg"
+    }
   }
 }
