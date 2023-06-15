@@ -14,10 +14,10 @@ object ItemRegistry {
 
     val TEST: Item = BoneItem(FabricItemSettings())
     fun init() {
-        registerItem("test", TEST)
+        register("test", TEST)
     }
 
-    fun registerItem(id: String, item: Item) {
+    fun register(id: String, item: Item) {
         Registry.register(Registries.ITEM, id(id), item)
         ITEM_LIST.add(item.defaultStack)
     }
