@@ -5,7 +5,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import org.teamvoided.shippost.BoneItem
+import org.teamvoided.shippost.items.BoneItem
 import org.teamvoided.shippost.TheShippostMod.id
 import java.util.*
 
