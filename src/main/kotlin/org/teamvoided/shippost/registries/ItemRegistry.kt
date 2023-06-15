@@ -13,8 +13,15 @@ object ItemRegistry {
     val ITEM_LIST = LinkedList<ItemStack>()
 
     val TEST: Item = BoneItem(FabricItemSettings())
+    val SANS: Item = BoneItem(FabricItemSettings())
+    val SKELETON: Item = BoneItem(FabricItemSettings())
+    val SKELETON_INCOMPLETE: Item = BoneItem(FabricItemSettings())
+
     fun init() {
         register("test", TEST)
+        register("sans", SANS)
+        register("skeleton", SKELETON)
+        register("skeleton_incomplete", SKELETON_INCOMPLETE)
     }
 
     fun register(id: String, item: Item) {
