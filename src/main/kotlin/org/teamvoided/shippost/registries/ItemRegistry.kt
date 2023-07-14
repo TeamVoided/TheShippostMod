@@ -3,34 +3,43 @@ package org.teamvoided.shippost.registries
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.item.SwordItem
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import org.teamvoided.shippost.items.BoneItem
 import org.teamvoided.shippost.TheShippostMod.id
+import org.teamvoided.shippost.items.BoneItem
+import org.teamvoided.shippost.items.ToolMaterials
 import java.util.*
 
+@Suppress("unused")
 object ItemRegistry {
     val ITEM_LIST = LinkedList<ItemStack>()
     val set = FabricItemSettings()
-    val TEST: Item = BoneItem(set)
-    val PELVIS: Item = BoneItem(set)
+    val TEST: Item = register("test", BoneItem(set))
+    val PELVIS: Item = register("pelvis", BoneItem(set))
 
-    val SANS: Item = BoneItem(set)
-    val SKELETON: Item = BoneItem(set)
-    val SKELETON_INCOMPLETE: Item = BoneItem(set)
+    val SANS: Item = register("sans", BoneItem(set))
+    val SKELETON: Item = register("skeleton", BoneItem(set))
+    val SKELETON_INCOMPLETE: Item = register("skeleton_incomplete", BoneItem(set))
+    val BONE_LIST = LinkedList<Item>()
+
+    val COPPER_SHORT_SWORD: Item =
+        register("copper_shortsword", SwordItem(ToolMaterials.COPPER_MATERIAL, 3, -2.4f, set))
+
 
     fun init() {
-        register("test", TEST)
-        register("sans", SANS)
-        register("skeleton", SKELETON)
-        register("skeleton_incomplete", SKELETON_INCOMPLETE)
-        for (bone in boneItems) register(bone, BoneItem(set))
-        register("pelvis", PELVIS)
+        for (bone in boneItems) BONE_LIST.add(register(bone, BoneItem(set)))
+
+//        register("test", TEST)
+//        register("sans", SANS)
+//        register("skeleton", SKELETON)
+//        register("skeleton_incomplete", SKELETON_INCOMPLETE)
+//        register("pelvis", PELVIS)
     }
 
-    fun register(id: String, item: Item) {
-        Registry.register(Registries.ITEM, id(id), item)
+    fun register(id: String, item: Item): Item {
         ITEM_LIST.add(item.defaultStack)
+        return Registry.register(Registries.ITEM, id(id), item)
     }
 
 

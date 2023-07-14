@@ -26,7 +26,6 @@ loom {
         //
         // This adds a new gradle task that runs the datagen API: "gradlew runDatagenClient"
         //
-
         create("data") {
             client()
             configName = "Fabric Data"
@@ -41,8 +40,8 @@ loom {
             client()
             configName = "Run Test World"
             ideConfigGenerated(true)
-            vmArg("-quickPlaySingleplayer \"Test\"")
             runDir("run")
+            programArg("--quickPlaySingleplayer \"test\"")
         }
 
     }

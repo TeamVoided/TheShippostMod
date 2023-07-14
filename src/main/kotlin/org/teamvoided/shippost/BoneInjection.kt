@@ -9,7 +9,7 @@ import org.teamvoided.shippost.TheShippostMod.id
 import java.util.function.Consumer
 
 object BoneInjection {
-    val TWO_HUNDRED_BONES = id("inject/two_hundred_six_bones")
+    private val TWO_HUNDRED_BONES = id("inject/two_hundred_six_bones")
     fun init() {
         LootTableEvents.MODIFY.register { _, _, id, supplier, _ ->
             lootLoad(id, supplier::pool)
