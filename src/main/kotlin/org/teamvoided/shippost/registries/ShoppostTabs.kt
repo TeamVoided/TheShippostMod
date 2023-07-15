@@ -9,7 +9,7 @@ import net.minecraft.registry.RegistryKeys
 import net.minecraft.text.Text
 import org.teamvoided.shippost.TheShippostMod.id
 
-object TabRegistry {
+object ShoppostTabs {
     val SHIPPOST_TAB = register("shippost_tab")
 
     fun init() {
@@ -17,10 +17,10 @@ object TabRegistry {
             Registries.ITEM_GROUP,
             SHIPPOST_TAB,
             FabricItemGroup.builder()
-                .icon { ItemRegistry.TEST.defaultStack }
+                .icon { ShoppostItems.TEST.defaultStack }
                 .displayName(Text.of("Your mother+"))
                 .entries { _, entries ->
-                    entries.addAll(ItemRegistry.ITEM_LIST)
+                    entries.addAll(ShoppostItems.ITEM_LIST)
                 }.build()
         )
     }

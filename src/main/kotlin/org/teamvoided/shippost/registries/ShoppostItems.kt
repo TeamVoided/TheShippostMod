@@ -12,7 +12,7 @@ import org.teamvoided.shippost.items.ToolMaterials
 import java.util.*
 
 @Suppress("unused")
-object ItemRegistry {
+object ShoppostItems {
     val ITEM_LIST = LinkedList<ItemStack>()
     val set = FabricItemSettings()
     val TEST: Item = register("test", BoneItem(set))
@@ -23,7 +23,7 @@ object ItemRegistry {
     val SKELETON_INCOMPLETE: Item = register("skeleton_incomplete", BoneItem(set))
     val BONE_LIST = LinkedList<Item>()
 
-    val COPPER_SHORT_SWORD: Item =
+    val COPPER_SHORTSWORD: Item =
         register("copper_shortsword", SwordItem(ToolMaterials.COPPER_MATERIAL, 3, -2.4f, set))
 
 

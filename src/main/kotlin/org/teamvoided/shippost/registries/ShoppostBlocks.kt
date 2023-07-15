@@ -7,9 +7,9 @@ import net.minecraft.item.BlockItem
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import org.teamvoided.shippost.TheShippostMod.id
-import org.teamvoided.shippost.registries.ItemRegistry.ITEM_LIST
+import org.teamvoided.shippost.registries.ShoppostItems.ITEM_LIST
 
-object BlockRegistry {
+object ShoppostBlocks {
 
 
     val TEST_BLOCK: Block = Block(FabricBlockSettings.create())
