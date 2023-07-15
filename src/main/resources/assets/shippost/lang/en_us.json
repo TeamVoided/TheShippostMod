@@ -1,0 +1,22 @@
+{
+  "item.shippost.copper_shortsword": "Copper Shortsword",
+  "item.shippost.ear_bones": "Ear Bones",
+  "item.shippost.cranium": "Cranium",
+  "item.shippost.face": "Face",
+  "item.shippost.part_of_face": "Part of Face",
+  "item.shippost.skull": "Skull",
+  "item.shippost.hand": "Hand",
+  "item.shippost.finger": "Finger",
+  "item.shippost.thumb": "Thumb",
+  "item.shippost.hand_base":  "Hand Base",
+  "item.shippost.foot":  "Foot",
+  "item.shippost.toe":  "Toe",
+  "item.shippost.foot_base":  "Foot Base",
+  "item.shippost.leg":  "Leg",
+  "item.shippost.arm":  "Arm",
+  "item.shippost.spine":  "Spine",
+  "item.shippost.spine_part":  "Spine Part",
+  "item.shippost.ribcage":  "Ribcage",
+  "item.shippost.half_ribcage":  "Half of a Ribcage",
+  "item.shippost.quarter_ribcage": "Quater of a Ribcage"
+}
