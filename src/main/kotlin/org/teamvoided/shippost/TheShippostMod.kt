@@ -6,9 +6,9 @@ import net.minecraft.item.Item
 import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
 import org.slf4j.LoggerFactory
-import org.teamvoided.shippost.registries.BlockRegistry
-import org.teamvoided.shippost.registries.ItemRegistry
-import org.teamvoided.shippost.registries.TabRegistry
+import org.teamvoided.shippost.registries.ShoppostBlocks
+import org.teamvoided.shippost.registries.ShoppostItems
+import org.teamvoided.shippost.registries.ShoppostTabs
 
 object TheShippostMod : ModInitializer {
     const val MODID = "shippost"
@@ -18,9 +18,9 @@ object TheShippostMod : ModInitializer {
         LOGGER.info("hi, Gun :gun:")
 
         BoneInjection.init()
-        ItemRegistry.init()
-        BlockRegistry.init()
-        TabRegistry.init()
+        ShoppostItems.init()
+        ShoppostBlocks.init()
+        ShoppostTabs.init()
     }
     fun getId(item: Item): Identifier = Registries.ITEM.getId(item)
     fun getId(block: Block): Identifier = Registries.BLOCK.getId(block)

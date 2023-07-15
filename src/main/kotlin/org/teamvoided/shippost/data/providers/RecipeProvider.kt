@@ -10,8 +10,8 @@ import net.minecraft.recipe.book.RecipeCategory
 import java.util.function.Consumer
 import net.minecraft.item.Items
 import org.teamvoided.shippost.TheShippostMod.getId
-import org.teamvoided.shippost.registries.BlockRegistry
-import org.teamvoided.shippost.registries.ItemRegistry
+import org.teamvoided.shippost.registries.ShoppostBlocks
+import org.teamvoided.shippost.registries.ShoppostItems
 
 class RecipeProvider(output: FabricDataOutput?) : FabricRecipeProvider(output) {
 
@@ -22,7 +22,7 @@ class RecipeProvider(output: FabricDataOutput?) : FabricRecipeProvider(output) {
     fun craftingRecipes(c: Consumer<RecipeJsonProvider>) {
 
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, BlockRegistry.TEST_BLOCK)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ShoppostBlocks.TEST_BLOCK)
             .pattern("###")
             .pattern("#$#")
             .pattern("~~~")
@@ -30,15 +30,15 @@ class RecipeProvider(output: FabricDataOutput?) : FabricRecipeProvider(output) {
             .input('$', Blocks.FURNACE)
             .input('~', Blocks.SMOOTH_STONE)
             .criterion(hasItem(Items.BONE), conditionsFromItem(Items.BONE))
-            .criterion(hasItem(BlockRegistry.TEST_BLOCK), conditionsFromItem(BlockRegistry.TEST_BLOCK))
-            .offerTo(c, getId(BlockRegistry.TEST_BLOCK))
+            .criterion(hasItem(ShoppostBlocks.TEST_BLOCK), conditionsFromItem(ShoppostBlocks.TEST_BLOCK))
+            .offerTo(c, getId(ShoppostBlocks.TEST_BLOCK))
 
 
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ItemRegistry.TEST)
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ShoppostItems.TEST)
             .input(Items.STICK)
             .input(Items.STICK)
             .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
-            .criterion(hasItem(ItemRegistry.TEST), conditionsFromItem(ItemRegistry.TEST))
-            .offerTo(c, getId(ItemRegistry.TEST))
+            .criterion(hasItem(ShoppostItems.TEST), conditionsFromItem(ShoppostItems.TEST))
+            .offerTo(c, getId(ShoppostItems.TEST))
     }
 }
