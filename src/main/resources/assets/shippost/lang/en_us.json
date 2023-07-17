@@ -1,5 +1,6 @@
 {
   "item.shippost.copper_shortsword": "Copper Shortsword",
+
   "item.shippost.ear_bones": "Ear Bones",
   "item.shippost.cranium": "Cranium",
   "item.shippost.face": "Face",
@@ -18,5 +19,7 @@
   "item.shippost.spine_part":  "Spine Part",
   "item.shippost.ribcage":  "Ribcage",
   "item.shippost.half_ribcage":  "Half of a Ribcage",
-  "item.shippost.quarter_ribcage": "Quarter of a Ribcage"
+  "item.shippost.quarter_ribcage": "Quarter of a Ribcage",
+
+  "item.shippost.netherite_stick": "Netherite Stick"
 }

@@ -32,7 +32,6 @@
     ]
   },
   "mixins": [
-    "shippost.mixins.json"
   ],
 
   "depends": {
