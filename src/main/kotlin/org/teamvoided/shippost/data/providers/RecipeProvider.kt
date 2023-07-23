@@ -22,6 +22,8 @@ class RecipeProvider(output: FabricDataOutput?) : FabricRecipeProvider(output) {
 
         //Exmaple
         /*
+
+            //SHAPED
                ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, SpBlocks.TEST_BLOCK)
                    .pattern("###")
                    .pattern("#$#")
@@ -33,6 +35,7 @@ class RecipeProvider(output: FabricDataOutput?) : FabricRecipeProvider(output) {
                    .criterion(hasItem(SpBlocks.TEST_BLOCK), conditionsFromItem(SpBlocks.TEST_BLOCK))
                    .offerTo(c, getId(SpBlocks.TEST_BLOCK))
 
+            //SHAPLESS
                ShapelessRecipeJsonBuilder.create(RecipeCategory.REDSTONE, SpItems.TEST)
                    .input(Items.STICK)
                    .input(Items.STICK)
