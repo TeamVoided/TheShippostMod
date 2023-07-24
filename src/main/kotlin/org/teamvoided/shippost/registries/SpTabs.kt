@@ -20,7 +20,7 @@ object SpTabs {
                 .icon { SpItems.TEST.defaultStack }
                 .displayName(Text.of("Your mother+"))
                 .entries { _, entries ->
-                    entries.addAll(SpItems.ITEM_LIST)
+                    entries.addAll(SpItems.ITEM_LIST.shuffled())
                 }.build()
         )
     }

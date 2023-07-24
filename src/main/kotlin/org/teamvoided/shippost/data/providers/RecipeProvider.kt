@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.data.server.recipe.RecipeJsonProvider
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder
+import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder
 import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder
 import net.minecraft.recipe.book.RecipeCategory
 import java.util.function.Consumer
@@ -54,6 +55,19 @@ class RecipeProvider(output: FabricDataOutput?) : FabricRecipeProvider(output) {
             .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
             .criterion(hasItem(SpItems.COPPER_SHORTSWORD), conditionsFromItem(SpItems.COPPER_SHORTSWORD))
             .offerTo(c, getId(SpItems.COPPER_SHORTSWORD))
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, SpItems.LEGAL_SUBSTANCE_CONCOCTION)
+            .input(SpItems.LEGAL_SUBSTANCE)
+            .input(SpItems.LEGAL_SUBSTANCE_TWO)
+            .input(SpItems.LEGAL_SUBSTANCE_THREE)
+            .criterion(hasItem(SpItems.LEGAL_SUBSTANCE), conditionsFromItem(SpItems.LEGAL_SUBSTANCE))
+            .criterion(hasItem(SpItems.LEGAL_SUBSTANCE_TWO), conditionsFromItem(SpItems.LEGAL_SUBSTANCE_TWO))
+            .criterion(hasItem(SpItems.LEGAL_SUBSTANCE_THREE), conditionsFromItem(SpItems.LEGAL_SUBSTANCE_THREE))
+            .criterion(
+                hasItem(SpItems.LEGAL_SUBSTANCE_CONCOCTION),
+                conditionsFromItem(SpItems.LEGAL_SUBSTANCE_CONCOCTION)
+            )
+            .offerTo(c, getId(SpItems.LEGAL_SUBSTANCE_CONCOCTION))
 
         SmithingTransformRecipeJsonBuilder.create(
             Ingredient.ofItems(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),

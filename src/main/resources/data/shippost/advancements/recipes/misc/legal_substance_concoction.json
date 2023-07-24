@@ -1,0 +1,74 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_legal_substance": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "shippost:legal_substance"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_legal_substance_concoction": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "shippost:legal_substance_concoction"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_legal_substance_three": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "shippost:legal_substance_three"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_legal_substance_two": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "shippost:legal_substance_two"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "shippost:legal_substance_concoction"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_legal_substance",
+      "has_legal_substance_two",
+      "has_legal_substance_three",
+      "has_legal_substance_concoction",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "shippost:legal_substance_concoction"
+    ]
+  },
+  "sends_telemetry_event": false
+}
