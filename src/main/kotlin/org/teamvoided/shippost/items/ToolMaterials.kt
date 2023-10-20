@@ -15,7 +15,7 @@ enum class ToolMaterials(
 ) : ToolMaterial {
     COPPER_MATERIAL(
         2, 501, 6.0f, 2.0f, 20,
-        Supplier{Ingredient.ofItems(Items.COPPER_INGOT)});
+        Supplier { Ingredient.ofItems(Items.COPPER_INGOT) });
 
     override fun getDurability(): Int = this.itemDurability
 

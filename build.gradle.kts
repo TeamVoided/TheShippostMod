@@ -1,31 +1,44 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-    kotlin("jvm")
-    id("fabric-loom")
-    `maven-publish`
-    java
+    id("fabric-loom") version "1.3.8"
+    kotlin("jvm") version "1.9.0"
+    kotlin("plugin.serialization") version "1.9.0"
+    id("org.teamvoided.iridium") version "3.0.2"
 }
+
 val modid = "shippost"
-group = property("maven_group")!!
-version = property("mod_version")!!
+
+
+group = project.properties["maven_group"]!!
+version = project.properties["mod_version"]!!
+base.archivesName.set(project.properties["archives_base_name"] as String)
+description = "Just a normal mod dont worry!"
 
 repositories {
+    mavenCentral()
+    maven {
+        name = "brokenfuseReleases"
+        url = uri("https://maven.teamvoided.org/releases")
+    }
+}
+
+modSettings {
+    modId(modid)
+    modName("The Shippost Mod")
+
+    entrypoint("main", "org.teamvoided.shippost.TheShippostMod")
+//    entrypoint("client", "org.teamvoided.shippost.TheShippostMod")
+    entrypoint("fabric-datagen", "org.teamvoided.shippost.TheShippostData")
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:${property("minecraft_version")}")
-    mappings("net.fabricmc:yarn:${property("yarn_mappings")}:v2")
-    modImplementation("net.fabricmc:fabric-loader:${property("loader_version")}")
-
-    modImplementation("net.fabricmc:fabric-language-kotlin:${property("fabric_kotlin_version")}")
-    modImplementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_api_version")}")
+    modImplementation("org.teamvoided:voidlib-core:1.5.7+1.20.1")
 }
 
 
 loom {
     runs {
-        //
-        // This adds a new gradle task that runs the datagen API: "gradlew runDatagenClient"
-        //
         create("data") {
             client()
             configName = "Fabric Data"
@@ -47,49 +60,19 @@ loom {
     }
 }
 tasks {
-
-    processResources {
-        inputs.property("version", project.version)
-        filesMatching("fabric.mod.json") {
-            expand(mutableMapOf("version" to project.version))
-        }
+    val targetJavaVersion = 17
+    withType<JavaCompile> {
+        options.encoding = "UTF-8"
+        options.release.set(targetJavaVersion)
     }
 
-    jar {
-        from("LICENSE")
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = targetJavaVersion.toString()
     }
 
-    publishing {
-        publications {
-            create<MavenPublication>("mavenJava") {
-                artifact(remapJar) {
-                    builtBy(remapJar)
-                }
-                artifact(kotlinSourcesJar) {
-                    builtBy(remapSourcesJar)
-                }
-            }
-        }
-
-        // select the repositories you want to publish to
-        repositories {
-            // uncomment to publish to the local maven
-            // mavenLocal()
-        }
+    java {
+        toolchain.languageVersion.set(JavaLanguageVersion.of(JavaVersion.toVersion(targetJavaVersion).toString()))
+        withSourcesJar()
     }
-
-    compileKotlin {
-        kotlinOptions.jvmTarget = "17"
-    }
-
 }
-
-java {
-    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-    // if it is present.
-    // If you remove this line, sources will not be generated.
-    withSourcesJar()
-}
-
-
-// configure the maven publication
+sourceSets["main"].resources.srcDir("src/main/generated")

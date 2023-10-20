@@ -17,12 +17,8 @@ object BoneInjection {
     }
 
     fun lootLoad(id: Identifier, addPool: Consumer<in LootPool.Builder>) {
-        if (id == EntityType.SKELETON.lootTableId) {
-            addPool.accept(
-                LootPool.builder()
-                    .with(LootTableEntry.builder(TWO_HUNDRED_BONES))
-            )
-        }
-    }
+        if (id == EntityType.SKELETON.lootTableId)
+            addPool.accept(LootPool.builder().with(LootTableEntry.builder(TWO_HUNDRED_BONES)))
 
+    }
 }

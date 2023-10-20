@@ -8,15 +8,17 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import org.teamvoided.shippost.TheShippostMod.id
 import org.teamvoided.shippost.registries.SpItems.ITEM_LIST
+import java.util.*
 
 object SpBlocks {
-
+    val BLOCK_LIST = LinkedList<Block>()
 
     val TEST_BLOCK: Block = registerWithItem("test_block", Block(FabricBlockSettings.create()))
 
     fun init() {}
 
     fun registerWithItem(id: String, block: Block): Block {
+        BLOCK_LIST.add(block)
         ITEM_LIST.add(Registry.register(Registries.ITEM, id(id), BlockItem(block, FabricItemSettings())).defaultStack)
         return register(id, block)
     }

@@ -15,6 +15,7 @@ import java.util.*
 @Suppress("unused")
 object SpItems {
     val ITEM_LIST = LinkedList<ItemStack>()
+    val itemsToModel = LinkedList<Item>()
     val set = FabricItemSettings().maxCount(64)
 
     val TEST: Item = register("test", BoneItem(set))
@@ -56,7 +57,10 @@ object SpItems {
 
     //NON Stackable
     val COPPER_SHORTSWORD: Item =
-        register("copper_shortsword", SwordItem(ToolMaterials.COPPER_MATERIAL, 3, -2.4f, FabricItemSettings()))
+        register(
+            "copper_shortsword",
+            SwordItem(ToolMaterials.COPPER_MATERIAL, 3, -2.4f, FabricItemSettings())
+        )
 
 
     fun init() {
@@ -64,6 +68,7 @@ object SpItems {
 
     fun register(id: String, item: Item): Item {
         ITEM_LIST.add(item.defaultStack)
+        itemsToModel.add(item)
         return Registry.register(Registries.ITEM, id(id), item)
     }
 
