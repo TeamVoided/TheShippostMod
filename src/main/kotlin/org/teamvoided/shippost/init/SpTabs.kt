@@ -1,4 +1,4 @@
-package org.teamvoided.shippost.registries
+package org.teamvoided.shippost.init
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.minecraft.item.ItemGroup
@@ -18,9 +18,9 @@ object SpTabs {
             SHIPPOST_TAB,
             FabricItemGroup.builder()
                 .icon { SpItems.TEST.defaultStack }
-                .displayName(Text.of("Your mother+"))
+                .name(Text.of("Your mother+"))
                 .entries { _, entries ->
-                    entries.addAll(SpItems.ITEM_LIST.shuffled())
+                    entries.addStacks(SpItems.ITEM_LIST.shuffled())
                 }.build()
         )
     }

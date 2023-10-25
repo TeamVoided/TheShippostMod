@@ -1,4 +1,4 @@
-package org.teamvoided.shippost.items
+package org.teamvoided.shippost.item
 
 import net.minecraft.item.Items
 import net.minecraft.item.ToolMaterial

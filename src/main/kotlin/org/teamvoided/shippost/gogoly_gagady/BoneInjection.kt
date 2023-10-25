@@ -1,4 +1,4 @@
-package org.teamvoided.shippost
+package org.teamvoided.shippost.gogoly_gagady
 
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents
 import net.minecraft.entity.EntityType
@@ -16,7 +16,7 @@ object BoneInjection {
         }
     }
 
-    fun lootLoad(id: Identifier, addPool: Consumer<in LootPool.Builder>) {
+    private fun lootLoad(id: Identifier, addPool: Consumer<in LootPool.Builder>) {
         if (id == EntityType.SKELETON.lootTableId)
             addPool.accept(LootPool.builder().with(LootTableEntry.builder(TWO_HUNDRED_BONES)))
 
