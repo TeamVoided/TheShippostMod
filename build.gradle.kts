@@ -27,13 +27,13 @@ modSettings {
     modId(modid)
     modName("The Shippost Mod")
 
-    entrypoint("main", "org.teamvoided.shippost.TheShippostMod")
-//    entrypoint("client", "org.teamvoided.shippost.TheShippostMod")
+    entrypoint("main", "org.teamvoided.shippost.TheShippostMod::mainInit")
+    entrypoint("client", "org.teamvoided.shippost.TheShippostMod::clientInit")
     entrypoint("fabric-datagen", "org.teamvoided.shippost.TheShippostData")
 }
 
 dependencies {
-    modImplementation("org.teamvoided:voidlib-core:1.5.7+1.20.1")
+    modImplementation("org.teamvoided:voidlib-core:1.5.8+1.20.1")
 }
 
 
@@ -41,7 +41,7 @@ loom {
     runs {
         create("data") {
             client()
-            configName = "Fabric Data"
+            configName = "Data Gen"
             ideConfigGenerated(true)
             vmArg("-Dfabric-api.datagen")
             vmArg("-Dfabric-api.datagen.output-dir=${file("src/main/generated")}")
