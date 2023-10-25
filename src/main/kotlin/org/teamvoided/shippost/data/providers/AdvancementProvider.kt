@@ -6,8 +6,8 @@ import net.minecraft.advancement.Advancement
 import net.minecraft.advancement.Advancement.*
 import net.minecraft.advancement.AdvancementDisplay
 import net.minecraft.advancement.AdvancementFrame
+import net.minecraft.advancement.criterion.LocationCriterion
 import net.minecraft.advancement.criterion.OnKilledCriterion.Conditions.createPlayerKilledEntity
-import net.minecraft.advancement.criterion.TickCriterion
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityType
 import net.minecraft.item.Items
@@ -22,8 +22,9 @@ import java.util.function.Consumer
 class AdvancementProvider(output: FabricDataOutput?) : FabricAdvancementProvider(output) {
     override fun generateAdvancement(c: Consumer<Advancement>?) {
 
-        LOG.info("ruins")
-        val advancement = Builder.create()
+        LOG.info("Gen Advancements")
+
+        val root = Task.create()
             .display(
                 Blocks.ORANGE_BANNER,
                 Text.translatable("advancements.story.root.title"),
@@ -34,10 +35,8 @@ class AdvancementProvider(output: FabricDataOutput?) : FabricAdvancementProvider
                 false,
                 false
             )
-            .criterion("tick", TickCriterion.Conditions.createTick())
-            .build(c, id("shippost/root").toString())
-
-        Builder.create().display(
+            .criterion("tick", LocationCriterion.Conditions.createTick()).build(c, id("shippost/root").toString())
+        fatalStrike = Task.create().display(
             AdvancementDisplay(
                 Items.DIAMOND_SWORD.defaultStack,
                 Text.translatable("Ded"),
@@ -54,10 +53,9 @@ class AdvancementProvider(output: FabricDataOutput?) : FabricAdvancementProvider
                 EntityPredicate.Builder.create().type(EntityType.PLAYER)
                     .typeSpecific(TypeSpecificPredicate.ANY)
             )
-        ).parent(advancement)
-            .build(c, id("shippost/kill_ruby").toString())
-
-
+        ).parent(root).build(c, id("shippost/kill_ruby").toString())
     }
-
+    companion object {
+        var fatalStrike :Advancement? = null
+    }
 }
