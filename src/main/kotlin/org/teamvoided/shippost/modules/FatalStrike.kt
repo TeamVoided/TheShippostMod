@@ -1,4 +1,4 @@
-package org.teamvoided.shippost.gogoly_gagady
+package org.teamvoided.shippost.modules
 
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents
 import net.minecraft.advancement.Advancement

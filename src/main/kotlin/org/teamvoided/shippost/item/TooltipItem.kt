@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
 import net.minecraft.world.World
 
-class LoreItem(val addTooltip: (stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) -> Unit,settings: FabricItemSettings) : Item(settings) {
+class TooltipItem(val addTooltip: (stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) -> Unit, settings: FabricItemSettings) : Item(settings) {
     constructor(addTooltip: (stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) -> Unit): this(addTooltip,FabricItemSettings())
 
 

@@ -1,4 +1,4 @@
-package org.teamvoided.shippost.gogoly_gagady
+package org.teamvoided.shippost.modules
 
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents
 import net.minecraft.entity.EntityType

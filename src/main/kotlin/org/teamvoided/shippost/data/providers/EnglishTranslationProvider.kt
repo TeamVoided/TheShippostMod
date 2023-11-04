@@ -10,15 +10,15 @@ import org.teamvoided.shippost.init.SpItems.ITEM_LIST
 import org.teamvoided.voidlib.core.gId
 
 class EnglishTranslationProvider(output: FabricDataOutput) : FabricLanguageProvider(output, "en_us") {
-    override fun generateTranslations(build: TranslationBuilder) {
+    override fun generateTranslations(gen: TranslationBuilder) {
 
-        ITEM_LIST.forEach { build.add(it.translationKey, genLang(it.item.gId)) }
+        ITEM_LIST.forEach { gen.add(it.translationKey, genLang(it.item.gId)) }
 
-        build.add("death.attack.substance_concoction", "%s was kill by a strong brew")
+        gen.add("death.attack.substance_concoction", "%s was kill by a strong brew")
 
-        build.add("item.${TheShippostMod.MODID}.bible.tooltip_1", "A book that does nothing.")
-        build.add("item.${TheShippostMod.MODID}.bible.tooltip_2", "What do you expect?")
-        build.add("item.${TheShippostMod.MODID}.bible.tooltip_3", "God isn't real!")
+        gen.add("item.${TheShippostMod.MODID}.bible.tooltip_1", "A book that does nothing.")
+        gen.add("item.${TheShippostMod.MODID}.bible.tooltip_2", "What do you expect?")
+        gen.add("item.${TheShippostMod.MODID}.bible.tooltip_3", "God isn't real!")
     }
     private fun genLang(identifier: Identifier): String = WordUtils.capitalize(identifier.path.replace("_", " "))
 }

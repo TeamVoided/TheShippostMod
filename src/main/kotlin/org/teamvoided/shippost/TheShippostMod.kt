@@ -3,8 +3,8 @@ package org.teamvoided.shippost
 import net.minecraft.util.Identifier
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.teamvoided.shippost.gogoly_gagady.BoneInjection
-import org.teamvoided.shippost.gogoly_gagady.FatalStrike
+import org.teamvoided.shippost.modules.BoneInjection
+import org.teamvoided.shippost.modules.FatalStrike
 import org.teamvoided.shippost.init.*
 
 @Suppress("unused")

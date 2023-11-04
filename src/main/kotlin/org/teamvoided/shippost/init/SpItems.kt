@@ -23,6 +23,7 @@ object SpItems {
 
     val SANS: Item = register("sans", BoneItem(set))
     val SKELETON: Item = register("skeleton", BoneItem(set))
+    val WITHER_SKELETON: Item = register("wither_skeleton", BoneItem(set))
     val SKELETON_INCOMPLETE: Item = register("skeleton_incomplete", BoneItem(set))
 
     //Bones
@@ -61,7 +62,7 @@ object SpItems {
 
 
     val BIBLE: Item = register("bible",
-        LoreItem { _, _, tooltip, _ ->
+        TooltipItem { _, _, tooltip, _ ->
             tooltip.add(Text.translatable("item.$MODID.bible.tooltip_1").formatted(Formatting.GRAY))
             tooltip.add(Text.translatable("item.$MODID.bible.tooltip_2").formatted(Formatting.GRAY))
             tooltip.add(Text.translatable("item.$MODID.bible.tooltip_3").formatted(Formatting.GRAY))

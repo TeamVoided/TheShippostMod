@@ -2,23 +2,24 @@ package org.teamvoided.shippost.data.providers
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
-import net.minecraft.data.server.recipe.RecipeJsonProvider
-import net.minecraft.data.server.recipe.ShapedRecipeJsonFactory
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonFactory
-import net.minecraft.data.server.recipe.TransformSmithingRecipeJsonFactory
+import net.minecraft.data.server.VanillaRecipesProvider
+import net.minecraft.data.server.recipe.*
 import net.minecraft.item.ItemConvertible
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.RecipeCategory
+import org.teamvoided.shippost.init.SpBlocks
 import org.teamvoided.shippost.init.SpItems
 import org.teamvoided.voidlib.core.gId
 import java.util.function.Consumer
 
 class RecipeProvider(output: FabricDataOutput?) : FabricRecipeProvider(output) {
 
-    override fun generateRecipes(exporter: Consumer<RecipeJsonProvider>) {
-        craftingRecipes(exporter)
-        smithingRecipes(exporter)
+    override fun generateRecipes(gen: Consumer<RecipeJsonProvider>) {
+        craftingRecipes(gen)
+        smelting(gen)
+        smithingRecipes(gen)
+        stonecuttingRecipes(gen)
     }
 
     private fun craftingRecipes(c: Consumer<RecipeJsonProvider>) {
@@ -71,6 +72,58 @@ class RecipeProvider(output: FabricDataOutput?) : FabricRecipeProvider(output) {
             .offerTo(c, SpItems.LEGAL_SUBSTANCE_CONCOCTION.gId)
 
         // SKELET TIME
+        skelet(c)
+        // NO MORE SKELET
+        ShapedRecipeJsonFactory.create(RecipeCategory.BUILDING_BLOCKS, SpBlocks.SWAGGIEST_STAIRS, 4)
+            .pattern("B  ")
+            .pattern("BB ")
+            .pattern("BBB")
+            .ingCri('B', Items.NETHERITE_BLOCK)
+            .crit(SpBlocks.SWAGGIEST_STAIRS)
+            .offerTo(c, SpBlocks.SWAGGIEST_STAIRS.gId)
+    }
+
+    private fun smelting(c: Consumer<RecipeJsonProvider>) {
+        CookingRecipeJsonFactory.createSmelting(
+            Ingredient.ofItems(SpItems.SKELETON), RecipeCategory.BUILDING_BLOCKS,
+            SpItems.WITHER_SKELETON.asItem(), 5f, 200
+        )
+            .criterion(hasItem(SpItems.WITHER_SKELETON), conditionsFromItem(SpItems.WITHER_SKELETON))
+            .offerTo(c)
+
+    }
+
+    private fun smithingRecipes(c: Consumer<RecipeJsonProvider>) {
+        TransformSmithingRecipeJsonFactory.create(
+            Ingredient.ofItems(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+            Ingredient.ofItems(Items.STICK),
+            Ingredient.ofItems(Items.NETHERITE_INGOT),
+            RecipeCategory.MISC,
+            SpItems.NETHERITE_STICK
+        )
+            .criterion(
+                hasItem(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+                conditionsFromItem(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE)
+            )
+            .criterion(hasItem(Items.NETHERITE_INGOT), conditionsFromItem(Items.NETHERITE_INGOT))
+            .criterion(hasItem(SpItems.NETHERITE_STICK), conditionsFromItem(SpItems.NETHERITE_STICK))
+            .offerTo(c, SpItems.NETHERITE_STICK.gId)
+    }
+
+    private fun stonecuttingRecipes(c: Consumer<RecipeJsonProvider>) {
+        VanillaRecipesProvider
+            .offerStonecuttingRecipe(c, RecipeCategory.REDSTONE, SpBlocks.SWAGGIEST_STAIRS, Items.NETHERITE_BLOCK)
+    }
+
+    fun ShapedRecipeJsonFactory.ingCri(c: Char, item: ItemConvertible): ShapedRecipeJsonFactory {
+        return this.ingredient(c, item).crit(item)
+    }
+
+    fun ShapedRecipeJsonFactory.crit(item: ItemConvertible): ShapedRecipeJsonFactory {
+        return this.criterion(hasItem(item), conditionsFromItem(item))
+    }
+
+    fun skelet(c: Consumer<RecipeJsonProvider>) {
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.SANS)
             .pattern("X")
             .pattern("Y")
@@ -268,31 +321,4 @@ class RecipeProvider(output: FabricDataOutput?) : FabricRecipeProvider(output) {
             .crit(SpItems.CRANIUM)
             .offerTo(c, SpItems.CRANIUM.gId)
     }
-
-
-    private fun smithingRecipes(c: Consumer<RecipeJsonProvider>) {
-        TransformSmithingRecipeJsonFactory.create(
-            Ingredient.ofItems(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
-            Ingredient.ofItems(Items.STICK),
-            Ingredient.ofItems(Items.NETHERITE_INGOT),
-            RecipeCategory.MISC,
-            SpItems.NETHERITE_STICK
-        )
-            .criterion(
-                hasItem(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
-                conditionsFromItem(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE)
-            )
-            .criterion(hasItem(Items.NETHERITE_INGOT), conditionsFromItem(Items.NETHERITE_INGOT))
-            .criterion(hasItem(SpItems.NETHERITE_STICK), conditionsFromItem(SpItems.NETHERITE_STICK))
-            .offerTo(c, SpItems.NETHERITE_STICK.gId)
-    }
-
-    fun ShapedRecipeJsonFactory.ingCri(c: Char, item: ItemConvertible): ShapedRecipeJsonFactory {
-        return this.ingredient(c, item).crit(item)
-    }
-
-    fun ShapedRecipeJsonFactory.crit(item: ItemConvertible): ShapedRecipeJsonFactory {
-        return this.criterion(hasItem(item), conditionsFromItem(item))
-    }
-
 }
