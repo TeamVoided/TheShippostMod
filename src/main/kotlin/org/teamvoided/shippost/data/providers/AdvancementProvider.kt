@@ -4,58 +4,68 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider
 import net.minecraft.advancement.Advancement
 import net.minecraft.advancement.Advancement.*
-import net.minecraft.advancement.AdvancementDisplay
-import net.minecraft.advancement.AdvancementFrame
-import net.minecraft.advancement.criterion.LocationCriterion
-import net.minecraft.advancement.criterion.OnKilledCriterion.Conditions.createPlayerKilledEntity
+import net.minecraft.advancement.AdvancementHolder
+import net.minecraft.advancement.criterion.LocationCriterionTrigger
 import net.minecraft.block.Blocks
-import net.minecraft.entity.EntityType
-import net.minecraft.item.Items
-import net.minecraft.predicate.entity.EntityPredicate
-import net.minecraft.predicate.entity.TypeSpecificPredicate
 import net.minecraft.text.Text
+import net.minecraft.text.component.AdvancementComponent
 import net.minecraft.util.Identifier
 import org.teamvoided.shippost.TheShipPostMod.LOG
 import org.teamvoided.shippost.TheShipPostMod.id
 import java.util.function.Consumer
 
-class AdvancementProvider(output: FabricDataOutput?) : FabricAdvancementProvider(output) {
-    override fun generateAdvancement(c: Consumer<Advancement>?) {
+class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(output) {
+    override fun generateAdvancement(c: Consumer<AdvancementHolder>) {
 
         LOG.info("Gen Advancements")
 
-        val root = Task.create()
-            .display(
+        val root = Builder.create()
+            .method_697(
                 Blocks.ORANGE_BANNER,
                 Text.translatable("advancements.story.root.title"),
                 Text.translatable("advancements.story.root.description"),
                 Identifier("textures/gui/advancements/backgrounds/stone.png"),
-                AdvancementFrame.TASK,
+                AdvancementComponent.TASK,
                 false,
                 false,
                 false
             )
-            .criterion("tick", LocationCriterion.Conditions.createTick()).build(c, id("shippost/root").toString())
-        fatalStrike = Task.create().display(
-            AdvancementDisplay(
-                Items.DIAMOND_SWORD.defaultStack,
-                Text.translatable("Ded"),
-                Text.translatable("RubyFirefly is now ded"),
-                null,
-                AdvancementFrame.CHALLENGE,
-                true,
-                true,
-                false
-            )
-        ).criterion(
-            "kill_ruby",
-            createPlayerKilledEntity(
-                EntityPredicate.Builder.create().type(EntityType.PLAYER)
-                    .typeSpecific(TypeSpecificPredicate.ANY)
-            )
-        ).parent(root).build(c, id("shippost/kill_ruby").toString())
+            .putCriteria("tick", LocationCriterionTrigger.Conditions.createTick())
+            .build(c, id("shippost/root").toString())
+//        Builder.create().display(
+//            AdvancementDisplay(
+//                Items.DIAMOND_SWORD.defaultStack,
+//                Text.translatable("Ded"),
+//                Text.translatable("RubyFirefly is now ded"),
+//                null,
+//                AdvancementComponent.CHALLENGE,
+//                true,
+//                true,
+//                false
+//            )
+//        )
+//            .putCriteria(
+//            "none",
+//           ImpossibleCriterionTrigger.Conditions.method_54938()
+//        ).parent(root).build(c, id("shippost/kill_ruby").toString())
+
+//        Builder.create().parent(AdvancementHolder(id("test"), null)).method_697(
+//            Blocks.DRAGON_EGG,
+//            Text.translatable("advancements.end.dragon_egg.title"),
+//            Text.translatable("advancements.end.dragon_egg.description"),
+//            null as Identifier?,
+//            AdvancementComponent.GOAL,
+//            true,
+//            true,
+//            false
+//        ).putCriteria(
+//            "dragon_egg",
+//            InventoryChangedCriterionTrigger.Conditions.create(*arrayOf<ItemConvertible>(Blocks.DRAGON_EGG))
+//        ).build(advancementConsumer, "end/dragon_egg")
     }
+
     companion object {
-        var fatalStrike :Advancement? = null
+        var fatalStrike: Advancement? = null
     }
+
 }

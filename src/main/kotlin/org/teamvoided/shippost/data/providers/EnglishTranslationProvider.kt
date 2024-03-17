@@ -6,8 +6,8 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.util.Identifier
 import org.apache.commons.lang3.text.WordUtils
 import org.teamvoided.shippost.TheShipPostMod
+import org.teamvoided.shippost.TheShipPostMod.gId
 import org.teamvoided.shippost.init.SpItems.ITEM_LIST
-import org.teamvoided.voidlib.core.gId
 
 class EnglishTranslationProvider(output: FabricDataOutput) : FabricLanguageProvider(output, "en_us") {
     override fun generateTranslations(gen: TranslationBuilder) {

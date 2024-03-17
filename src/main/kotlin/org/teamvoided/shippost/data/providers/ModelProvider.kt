@@ -9,10 +9,10 @@ import net.minecraft.data.client.model.*
 import net.minecraft.data.client.model.BlockStateModelGenerator.*
 import net.minecraft.item.Items
 import net.minecraft.util.Identifier
+import org.teamvoided.shippost.TheShipPostMod.gId
 import org.teamvoided.shippost.init.SpBlocks
 import org.teamvoided.shippost.init.SpItems
 import org.teamvoided.shippost.init.SpItems.itemsToModel
-import org.teamvoided.voidlib.core.gId
 
 class ModelProvider(output: FabricDataOutput?) : FabricModelProvider(output) {
     private val itemEx = listOf(SpItems.BIBLE)

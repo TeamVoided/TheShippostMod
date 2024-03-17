@@ -1,10 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("fabric-loom") version "1.3.8"
-    kotlin("jvm") version "1.9.0"
-    kotlin("plugin.serialization") version "1.9.0"
-    id("org.teamvoided.iridium") version "3.0.2"
+    id("fabric-loom") version "1.5.6"
+    kotlin("jvm") version "1.9.22"
+    kotlin("plugin.serialization") version "1.9.22"
+    id("org.teamvoided.iridium") version "3.1.9"
 }
 
 val modid = "shippost"
@@ -32,9 +32,7 @@ modSettings {
     entrypoint("fabric-datagen", "org.teamvoided.shippost.TheShipPostData")
 }
 
-dependencies {
-    modImplementation("org.teamvoided:voidlib-core:1.5.8+1.20.1")
-}
+dependencies {}
 
 
 loom {
