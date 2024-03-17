@@ -8,7 +8,7 @@ import net.minecraft.block.StairsBlock
 import net.minecraft.item.BlockItem
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import org.teamvoided.shippost.TheShippostMod.id
+import org.teamvoided.shippost.TheShipPostMod.id
 import org.teamvoided.shippost.init.SpItems.ITEM_LIST
 import java.util.*
 

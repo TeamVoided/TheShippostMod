@@ -8,8 +8,8 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
-import org.teamvoided.shippost.TheShippostMod.MODID
-import org.teamvoided.shippost.TheShippostMod.id
+import org.teamvoided.shippost.TheShipPostMod.MODID
+import org.teamvoided.shippost.TheShipPostMod.id
 import org.teamvoided.shippost.item.*
 import java.util.*
 

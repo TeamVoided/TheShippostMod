@@ -1,2 +1,2 @@
-# Shippost Mod
+# ShipPost Mod
 nothing sus here

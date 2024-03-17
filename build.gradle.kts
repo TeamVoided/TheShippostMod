@@ -25,11 +25,11 @@ repositories {
 
 modSettings {
     modId(modid)
-    modName("The Shippost Mod")
+    modName("The ShipPost Mod")
 
-    entrypoint("main", "org.teamvoided.shippost.TheShippostMod::mainInit")
-    entrypoint("client", "org.teamvoided.shippost.TheShippostMod::clientInit")
-    entrypoint("fabric-datagen", "org.teamvoided.shippost.TheShippostData")
+    entrypoint("main", "org.teamvoided.shippost.TheShipPostMod::mainInit")
+    entrypoint("client", "org.teamvoided.shippost.TheShipPostMod::clientInit")
+    entrypoint("fabric-datagen", "org.teamvoided.shippost.TheShipPostData")
 }
 
 dependencies {

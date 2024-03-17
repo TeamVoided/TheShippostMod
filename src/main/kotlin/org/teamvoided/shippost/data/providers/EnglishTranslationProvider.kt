@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.util.Identifier
 import org.apache.commons.lang3.text.WordUtils
-import org.teamvoided.shippost.TheShippostMod
+import org.teamvoided.shippost.TheShipPostMod
 import org.teamvoided.shippost.init.SpItems.ITEM_LIST
 import org.teamvoided.voidlib.core.gId
 
@@ -16,9 +16,9 @@ class EnglishTranslationProvider(output: FabricDataOutput) : FabricLanguageProvi
 
         gen.add("death.attack.substance_concoction", "%s was kill by a strong brew")
 
-        gen.add("item.${TheShippostMod.MODID}.bible.tooltip_1", "A book that does nothing.")
-        gen.add("item.${TheShippostMod.MODID}.bible.tooltip_2", "What do you expect?")
-        gen.add("item.${TheShippostMod.MODID}.bible.tooltip_3", "God isn't real!")
+        gen.add("item.${TheShipPostMod.MODID}.bible.tooltip_1", "A book that does nothing.")
+        gen.add("item.${TheShipPostMod.MODID}.bible.tooltip_2", "What do you expect?")
+        gen.add("item.${TheShipPostMod.MODID}.bible.tooltip_3", "God isn't real!")
     }
     private fun genLang(identifier: Identifier): String = WordUtils.capitalize(identifier.path.replace("_", " "))
 }

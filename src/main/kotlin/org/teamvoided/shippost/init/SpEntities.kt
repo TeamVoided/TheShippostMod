@@ -9,7 +9,7 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnGroup
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import org.teamvoided.shippost.TheShippostMod.id
+import org.teamvoided.shippost.TheShipPostMod.id
 import org.teamvoided.shippost.entity.PelvisEntity
 
 object SpEntities {

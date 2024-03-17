@@ -10,7 +10,7 @@ import java.util.concurrent.CompletableFuture
 
 
 @Suppress("unused")
-class TheShippostData : DataGeneratorEntrypoint {
+class TheShipPostData : DataGeneratorEntrypoint {
     override fun onInitializeDataGenerator(gen: FabricDataGenerator) {
         val pack: FabricDataGenerator.Pack = gen.createPack()
 

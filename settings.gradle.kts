@@ -9,4 +9,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "TheShippostMod"
+rootProject.name = "TheShipPostMod"

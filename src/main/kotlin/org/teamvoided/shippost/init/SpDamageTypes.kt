@@ -4,7 +4,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.damage.DamageType
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
-import org.teamvoided.shippost.TheShippostMod.id
+import org.teamvoided.shippost.TheShipPostMod.id
 
 object SpDamageTypes {
 

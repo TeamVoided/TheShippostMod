@@ -5,7 +5,7 @@ import net.minecraft.entity.EntityType
 import net.minecraft.loot.LootPool
 import net.minecraft.loot.entry.LootTableEntry
 import net.minecraft.util.Identifier
-import org.teamvoided.shippost.TheShippostMod.id
+import org.teamvoided.shippost.TheShipPostMod.id
 import java.util.function.Consumer
 
 object BoneInjection {

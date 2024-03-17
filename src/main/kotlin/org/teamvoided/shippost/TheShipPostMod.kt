@@ -8,7 +8,7 @@ import org.teamvoided.shippost.modules.FatalStrike
 import org.teamvoided.shippost.init.*
 
 @Suppress("unused")
-object TheShippostMod {
+object TheShipPostMod {
     const val MODID: String = "shippost"
     val LOG: Logger = LoggerFactory.getLogger(MODID)
     fun id(path: String): Identifier = Identifier(MODID, path)

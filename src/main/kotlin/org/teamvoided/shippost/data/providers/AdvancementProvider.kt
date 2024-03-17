@@ -15,8 +15,8 @@ import net.minecraft.predicate.entity.EntityPredicate
 import net.minecraft.predicate.entity.TypeSpecificPredicate
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
-import org.teamvoided.shippost.TheShippostMod.LOG
-import org.teamvoided.shippost.TheShippostMod.id
+import org.teamvoided.shippost.TheShipPostMod.LOG
+import org.teamvoided.shippost.TheShipPostMod.id
 import java.util.function.Consumer
 
 class AdvancementProvider(output: FabricDataOutput?) : FabricAdvancementProvider(output) {
