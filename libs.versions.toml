@@ -1,0 +1,19 @@
+[versions]
+kotlin = "1.9.23"
+fabric-loom = "1.6.3"
+iridium = "3.2.0"
+
+farrow = "1.0.0+arrow.1.2.3"
+#reef = "0.1.0"
+
+[libraries]
+farrow = { module = "net.wiredtomato:farrow", version.ref = "farrow" }
+#reef = { module = "org.teamvoided:reef", version.ref = "reef" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+fabric-loom = { id = "fabric-loom", version.ref = "fabric-loom" }
+iridium = { id = "org.teamvoided.iridium", version.ref = "iridium"}
+iridium-publish = { id = "iridium.project.publish-script", version.ref = "iridium"}
+iridium-upload = { id = "iridium.mod.upload-script", version.ref = "iridium" }

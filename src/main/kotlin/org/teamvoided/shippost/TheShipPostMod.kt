@@ -11,6 +11,7 @@ import org.teamvoided.shippost.init.SpEntities
 import org.teamvoided.shippost.init.SpItems
 import org.teamvoided.shippost.init.SpTabs
 import org.teamvoided.shippost.modules.BoneInjection
+import org.teamvoided.shippost.modules.ExplodeButton
 import org.teamvoided.shippost.modules.FatalStrike
 
 @Suppress("unused")
@@ -31,9 +32,11 @@ object TheShipPostMod {
 
         BoneInjection.init()
         FatalStrike.inti()
+        ExplodeButton.initServer()
     }
 
     fun clientInit() {
         SpEntities.clientInit()
+        ExplodeButton.initClient()
     }
 }
