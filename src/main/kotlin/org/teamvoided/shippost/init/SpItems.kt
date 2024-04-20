@@ -1,6 +1,5 @@
 package org.teamvoided.shippost.init
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.SwordItem
@@ -17,7 +16,7 @@ import java.util.*
 object SpItems {
     val ITEM_LIST = LinkedList<ItemStack>()
     val itemsToModel = LinkedList<Item>()
-    val set = FabricItemSettings().maxCount(64)
+    val set = Item.Settings().maxCount(64)
 
     val TEST: Item = register("test", BoneItem(set))
 
@@ -63,28 +62,25 @@ object SpItems {
 
     val BIBLE: Item = register("bible",
         TooltipItem { _, _, tooltip, _ ->
-            tooltip.add(Text.translatable("item.$MODID.bible.tooltip_1").formatted(Formatting.GRAY))
-            tooltip.add(Text.translatable("item.$MODID.bible.tooltip_2").formatted(Formatting.GRAY))
-            tooltip.add(Text.translatable("item.$MODID.bible.tooltip_3").formatted(Formatting.GRAY))
+            if (tooltip != null) {
+                tooltip.add(Text.translatable("item.$MODID.bible.tooltip_1").formatted(Formatting.GRAY))
+                tooltip.add(Text.translatable("item.$MODID.bible.tooltip_2").formatted(Formatting.GRAY))
+                tooltip.add(Text.translatable("item.$MODID.bible.tooltip_3").formatted(Formatting.GRAY))
+            }
         })
 
 
     //NON Stackable
-    val COPPER_SHORTSWORD: Item =
-        register(
-            "copper_shortsword",
-            SwordItem(ToolMaterials.COPPER_MATERIAL, 3, -2.4f, FabricItemSettings())
-        )
+    val COPPER_SHORTSWORD: Item = register(
+        "copper_shortsword", SwordItem(ToolMaterials.COPPER_MATERIAL, Item.Settings())
+    )
 
 
-    fun init() {
-    }
+    fun init() {}
 
     fun register(id: String, item: Item): Item {
         ITEM_LIST.add(item.defaultStack)
         itemsToModel.add(item)
         return Registry.register(Registries.ITEM, id(id), item)
     }
-
-
 }

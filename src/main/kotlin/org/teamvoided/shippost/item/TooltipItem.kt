@@ -1,17 +1,19 @@
 package org.teamvoided.shippost.item
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
-import net.minecraft.world.World
 
-class TooltipItem(val addTooltip: (stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) -> Unit, settings: FabricItemSettings) : Item(settings) {
-    constructor(addTooltip: (stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) -> Unit): this(addTooltip,FabricItemSettings())
+typealias AddTooltip = (stack: ItemStack?, itemContext: Item.C_rdhfmrgz?, tooltip: MutableList<Text>?, flags: TooltipContext?) -> Unit
 
+class TooltipItem(val addTooltip: AddTooltip, settings: Settings) : Item(settings) {
+    constructor(addTooltip: AddTooltip) : this(addTooltip, Settings())
 
-    override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
-        addTooltip(stack, world, tooltip, context)
+    override fun appendTooltip(
+        stack: ItemStack?, itemContext: C_rdhfmrgz?, tooltip: MutableList<Text>?, flags: TooltipContext?
+    ) {
+        super.appendTooltip(stack, itemContext, tooltip, flags)
+        addTooltip(stack, itemContext, tooltip, flags)
     }
 }

@@ -25,11 +25,12 @@ class PelvisEntity : ThrownItemEntity {
             super(SpEntities.PELVIS_ENTITY as EntityType<out ThrownItemEntity?>, x, y, z, world)
 
     override fun getDefaultItem(): Item = SpItems.PELVIS
-    private fun getParticleParameters(): ParticleEffect = ItemStackParticleEffect(ParticleTypes.ITEM, this.item)
+    private fun getParticleParameters(): ParticleEffect =
+        ItemStackParticleEffect(ParticleTypes.ITEM, this.defaultItem.defaultStack)
 
     private fun spawnParticles() {
         val particleEffect = getParticleParameters()
-        for (i in 0..7) {
+        for (ignored in 0..7) {
             world.addParticle(particleEffect, this.x, this.y, this.z, 0.0, 0.0, 0.0)
         }
     }

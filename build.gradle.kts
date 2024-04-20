@@ -70,7 +70,7 @@ loom {
 sourceSets["main"].resources.srcDir("src/main/generated")
 
 tasks {
-    val targetJavaVersion = 17
+    val targetJavaVersion = 21
     withType<JavaCompile> {
         options.encoding = "UTF-8"
         options.release.set(targetJavaVersion)

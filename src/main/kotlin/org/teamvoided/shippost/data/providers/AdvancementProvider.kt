@@ -5,27 +5,31 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider
 import net.minecraft.advancement.Advancement
 import net.minecraft.advancement.Advancement.*
 import net.minecraft.advancement.AdvancementHolder
+import net.minecraft.advancement.AdvancementType
 import net.minecraft.advancement.criterion.LocationCriterionTrigger
 import net.minecraft.block.Blocks
+import net.minecraft.registry.HolderLookup
 import net.minecraft.text.Text
-import net.minecraft.text.component.AdvancementComponent
 import net.minecraft.util.Identifier
 import org.teamvoided.shippost.TheShipPostMod.LOG
 import org.teamvoided.shippost.TheShipPostMod.id
+import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
-class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(output) {
-    override fun generateAdvancement(c: Consumer<AdvancementHolder>) {
+class AdvancementProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Provider>) :
+    FabricAdvancementProvider(o, r) {
+
+    override fun generateAdvancement(provider: HolderLookup.Provider, c: Consumer<AdvancementHolder>?) {
 
         LOG.info("Gen Advancements")
 
         val root = Builder.create()
-            .method_697(
+            .display(
                 Blocks.ORANGE_BANNER,
                 Text.translatable("advancements.story.root.title"),
                 Text.translatable("advancements.story.root.description"),
                 Identifier("textures/gui/advancements/backgrounds/stone.png"),
-                AdvancementComponent.TASK,
+                AdvancementType.TASK,
                 false,
                 false,
                 false

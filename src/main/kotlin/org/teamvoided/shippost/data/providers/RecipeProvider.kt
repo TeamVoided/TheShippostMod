@@ -8,11 +8,13 @@ import net.minecraft.item.ItemConvertible
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.RecipeCategory
+import net.minecraft.registry.HolderLookup
 import org.teamvoided.shippost.TheShipPostMod.gId
 import org.teamvoided.shippost.init.SpBlocks
 import org.teamvoided.shippost.init.SpItems
+import java.util.concurrent.CompletableFuture
 
-class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
+class RecipeProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Provider>) : FabricRecipeProvider(o, r) {
 
     override fun generateRecipes(re: RecipeExporter) {
         craftingRecipes(re)

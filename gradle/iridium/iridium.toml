@@ -4,10 +4,10 @@ githubRepo = "TeamVoided/TheShippostMod"
 discordServerInviteId = "KZ5Q364hEg"
 authors = [ "Ender", "Astra", "Dusk", "Deathlord"  ]
 majorMinecraftVersion = "1.20"
-minecraftVersion = "1.20.4"
-fabricLoaderVersion = "0.15.7"
-fabricApiVersion = "0.96.4+1.20.4"
-fabricLangKotlinVersion = "1.10.18+kotlin.1.9.22"
+minecraftVersion = "1.20.5-rc2"
+fabricLoaderVersion = "0.15.10"
+fabricApiVersion = "0.97.3+1.20.5"
+fabricLangKotlinVersion = "1.10.19+kotlin.1.9.23"
 license = "MIT"
 modules = [  ]
 
@@ -20,4 +20,4 @@ modules = [  ]
     # MOJPARCH: Parchment layered on top of the official Mojang mappings
     # MOJYARN: Yarn layered on top of the official Mojang mappings
     type = "QUILT"
-    version = "1.20.4+build.3"
+    version = "1.20.5-rc2+build.3"

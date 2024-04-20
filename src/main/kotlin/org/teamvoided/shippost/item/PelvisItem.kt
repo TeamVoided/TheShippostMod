@@ -1,6 +1,5 @@
 package org.teamvoided.shippost.item
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.sound.SoundCategory
@@ -11,7 +10,7 @@ import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 import org.teamvoided.shippost.entity.PelvisEntity
 
-class PelvisItem(settings: FabricItemSettings) : BoneItem(settings) {
+class PelvisItem(settings: Settings) : BoneItem(settings) {
 
     override fun use(world: World, user: PlayerEntity, hand: Hand?): TypedActionResult<ItemStack>? {
         val itemStack = user.getStackInHand(hand)

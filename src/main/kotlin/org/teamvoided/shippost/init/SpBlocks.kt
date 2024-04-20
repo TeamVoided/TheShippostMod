@@ -1,11 +1,11 @@
 package org.teamvoided.shippost.init
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.StairsBlock
 import net.minecraft.item.BlockItem
+import net.minecraft.item.Item
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import org.teamvoided.shippost.TheShipPostMod.id
@@ -27,7 +27,7 @@ object SpBlocks {
 
     private fun registerWithItem(id: String, block: Block): Block {
         BLOCK_LIST.add(block)
-        ITEM_LIST.add(Registry.register(Registries.ITEM, id(id), BlockItem(block, FabricItemSettings())).defaultStack)
+        ITEM_LIST.add(Registry.register(Registries.ITEM, id(id), BlockItem(block, Item.Settings())).defaultStack)
         return register(id, block)
     }
 
