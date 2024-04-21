@@ -10,6 +10,7 @@ import org.teamvoided.shippost.init.SpBlocks
 import org.teamvoided.shippost.init.SpEntities
 import org.teamvoided.shippost.init.SpItems
 import org.teamvoided.shippost.init.SpTabs
+import org.teamvoided.shippost.modules.BadToTheBoneModule
 import org.teamvoided.shippost.modules.BoneInjection
 import org.teamvoided.shippost.modules.ExplodeButton
 import org.teamvoided.shippost.modules.FatalStrike
@@ -32,7 +33,8 @@ object TheShipPostMod {
 
         BoneInjection.init()
         FatalStrike.inti()
-        ExplodeButton.initServer()
+        ExplodeButton.initCommon()
+        BadToTheBoneModule.initCommon()
     }
 
     fun clientInit() {
