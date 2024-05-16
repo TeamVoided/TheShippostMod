@@ -21,7 +21,7 @@ object SpItems {
 
     val TEST: Item = register("test", BoneItem(set()))
 
-    val SKELETON_INCOMPLETE: Item = register("skeleton_incomplete", BoneItem(set()))
+    val SKELEON: Item = register("skeleon", BoneItem(set()))
 
     val SANS: Item = register("sans", BoneItem(set()))
     val SKELETON: Item = register("skeleton", SpawnEggItem(EntityType.SKELETON, 0xffffff, 0xffffff, set()))

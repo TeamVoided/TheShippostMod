@@ -152,12 +152,12 @@ class RecipeProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Prov
             .offerTo(c, SpItems.SANS.gId)
 
         ShapelessRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.SKELETON)
-            .ingredient(SpItems.SKELETON_INCOMPLETE)
+            .ingredient(SpItems.SKELEON)
             .ingredient(Items.BONE)
-            .criterion(hasItem(SpItems.SKELETON_INCOMPLETE), conditionsFromItem(SpItems.SKELETON_INCOMPLETE))
+            .criterion(hasItem(SpItems.SKELEON), conditionsFromItem(SpItems.SKELEON))
             .offerTo(c, SpItems.SKELETON.gId)
 
-        ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.SKELETON_INCOMPLETE)
+        ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.SKELEON)
             .pattern(" S ")
             .pattern("ATA")
             .pattern("L L")
@@ -165,8 +165,8 @@ class RecipeProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Prov
             .ingCri('A', SpItems.ARM)
             .ingCri('L', SpItems.LEG)
             .ingCri('T', SpItems.TORSO)
-            .crit(SpItems.SKELETON_INCOMPLETE)
-            .offerTo(c, SpItems.SKELETON_INCOMPLETE.gId)
+            .crit(SpItems.SKELEON)
+            .offerTo(c, SpItems.SKELEON.gId)
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.SKULL)
             .pattern("ECE")
@@ -187,8 +187,8 @@ class RecipeProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Prov
             .offerTo(c, SpItems.ARM.gId)
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.LEG)
-            .pattern("BBB")
-            .pattern("BBB")
+            .pattern("B  ")
+            .pattern("B  ")
             .pattern("BBF")
             .ingCri('F', SpItems.FOOT)
             .ingCri('B', Items.BONE)
@@ -246,10 +246,8 @@ class RecipeProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Prov
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.HALF_RIBCAGE)
             .pattern("R")
-            .pattern("B")
             .pattern("R")
             .ingCri('R', SpItems.QUARTER_RIBCAGE)
-            .ingCri('B', Items.BONE)
             .crit(SpItems.HALF_RIBCAGE)
             .offerTo(c, SpItems.HALF_RIBCAGE.gId)
 
