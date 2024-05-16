@@ -109,6 +109,21 @@ class RecipeProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Prov
             .criterion(hasItem(Items.NETHERITE_INGOT), conditionsFromItem(Items.NETHERITE_INGOT))
             .criterion(hasItem(SpItems.NETHERITE_STICK), conditionsFromItem(SpItems.NETHERITE_STICK))
             .offerTo(c, SpItems.NETHERITE_STICK.gId)
+
+        TransformSmithingRecipeJsonFactory.create(
+            Ingredient.ofItems(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+            Ingredient.ofItems(SpItems.COPPER_SHORTSWORD),
+            Ingredient.ofItems(Items.NETHERITE_INGOT),
+            RecipeCategory.MISC,
+            SpItems.NETHERITE_COPPER_SHORTSWORD
+        )
+            .criterion(
+                hasItem(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+                conditionsFromItem(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE)
+            )
+            .criterion(hasItem(Items.NETHERITE_INGOT), conditionsFromItem(Items.NETHERITE_INGOT))
+            .criterion(hasItem(SpItems.NETHERITE_COPPER_SHORTSWORD), conditionsFromItem(SpItems.NETHERITE_COPPER_SHORTSWORD))
+            .offerTo(c, SpItems.NETHERITE_COPPER_SHORTSWORD.gId)
     }
 
     private fun stonecuttingRecipes(c: RecipeExporter) {
@@ -322,4 +337,5 @@ class RecipeProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Prov
             .crit(SpItems.CRANIUM)
             .offerTo(c, SpItems.CRANIUM.gId)
     }
+
 }

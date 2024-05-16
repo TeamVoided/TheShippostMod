@@ -5,7 +5,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
 
-typealias AddTooltip = (stack: ItemStack?, itemContext: Item.TooltipContext?, tooltip: MutableList<Text>?, config: TooltipConfig?) -> Unit
+typealias AddTooltip = (stack: ItemStack, itemContext: Item.TooltipContext?, tooltip: MutableList<Text>, config: TooltipConfig?) -> Unit
 
 class TooltipItem(val addTooltip: AddTooltip, settings: Settings) : Item(settings) {
     constructor(addTooltip: AddTooltip) : this(addTooltip, Settings())
@@ -14,6 +14,8 @@ class TooltipItem(val addTooltip: AddTooltip, settings: Settings) : Item(setting
         stack: ItemStack?, context: TooltipContext?, tooltip: MutableList<Text>?, config: TooltipConfig?
     ) {
         super.appendTooltip(stack, context, tooltip, config)
-        addTooltip(stack, context, tooltip, config)
+        if (tooltip != null && stack != null) {
+            addTooltip(stack, context, tooltip, config)
+        }
     }
 }

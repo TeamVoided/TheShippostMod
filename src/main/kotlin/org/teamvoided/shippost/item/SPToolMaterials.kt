@@ -8,7 +8,7 @@ import net.minecraft.registry.tag.BlockTags
 import net.minecraft.registry.tag.TagKey
 import java.util.function.Supplier
 
-enum class ToolMaterials(
+enum class SPToolMaterials(
     private val itemDurability: Int,
     private val miningSpeed: Float,
     private val attackDamage: Float,
