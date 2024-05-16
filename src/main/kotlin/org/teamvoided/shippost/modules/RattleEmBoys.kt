@@ -13,8 +13,8 @@ object RattleEmBoys {
         AttackEntityCallback.EVENT.register { player, world, hand, entity, entityHitResult ->
             val random = world.random
             if (!world.isClient
-                && entity.type == EntityType.SKELETON
-                && random.range(0, 100) == 0
+                && isSkelet(entity.type)
+                && random.range(0, 10) == 0
             ) {
                 player.sendSystemMessage(Text.of("Rattle em boys"))
                 world.playSound(
@@ -26,12 +26,19 @@ object RattleEmBoys {
                         null,
                         entity.blockPos, SoundEvents.BLOCK_BONE_BLOCK_STEP, SoundCategory.HOSTILE
                     )
-                    val skelet = SkeletonEntity(EntityType.SKELETON, world)
+                    val skelet = SkeletonEntity(entity.type as EntityType<out SkeletonEntity>, world)
                     skelet.setPosition(entity.pos)
                     world.spawnEntity(skelet)
                 }
             }
             ActionResult.PASS
         }
+    }
+
+    fun isSkelet(type: EntityType<*>): Boolean {
+        return type == EntityType.SKELETON
+                || type == EntityType.WITHER_SKELETON
+                || type == EntityType.BOGGED
+                || type == EntityType.STRAY
     }
 }
