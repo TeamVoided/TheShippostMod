@@ -29,7 +29,7 @@ enum class ToolMaterials(
 
     override fun getAttackDamage(): Float = this.attackDamage
 
-    override fun method_58419(): TagKey<Block> = this.incorrectTag
+    override fun getIncorrectForDropsBlocks(): TagKey<Block> = this.incorrectTag
 
 
     override fun getEnchantability(): Int = this.enchantability

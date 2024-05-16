@@ -18,5 +18,4 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             LOG.error("Error {}", e.toString())
         }
     }
-
 }
