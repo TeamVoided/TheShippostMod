@@ -6,7 +6,7 @@ import net.minecraft.item.FoodComponent
 import net.minecraft.item.Items
 
 object SoundsLikeCheese {
-    val cheese = FoodComponent.Builder().hunger(2).saturation(0.5f).build()
+    val cheese = FoodComponent.Builder().hunger(4).saturation(2.5f).build()
 
     fun init() {
         DefaultItemComponentEvents.MODIFY.register { c ->
