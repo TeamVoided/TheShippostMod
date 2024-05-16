@@ -17,7 +17,17 @@ object BoneInjection {
     }
 
     private fun lootLoad(id: RegistryKey<LootTable>, addPool: Consumer<in LootPool.Builder>) {
-        if (id == EntityType.SKELETON.lootTableId)
-            addPool.accept(LootPool.builder().with(LootTableEntry.method_428(TWO_HUNDRED_BONES)))
+        if (isSkelet(id)) addPool.accept(LootPool.builder().with(LootTableEntry.method_428(TWO_HUNDRED_BONES)))
+    }
+
+    fun isSkelet(id: RegistryKey<LootTable>): Boolean {
+        return when (id) {
+            EntityType.SKELETON.lootTableId -> true
+            EntityType.SKELETON.lootTableId -> true
+            EntityType.STRAY.lootTableId -> true
+            EntityType.BOGGED.lootTableId -> true
+            EntityType.SKELETON_HORSE.lootTableId -> true
+            else -> false
+        }
     }
 }
