@@ -25,10 +25,8 @@ object ExplodeButton {
 
     fun initCommon() {
         PayloadTypeRegistry.playC2S().register(ExplodeKey.ID, ExplodeKey.CODEC)
-        ServerPlayNetworking.registerGlobalReceiver(ExplodeKey.ID) { _, c: ServerPlayNetworking.Context ->
+        ServerPlayNetworking.registerGlobalReceiver(ExplodeKey.ID) { _, c ->
             val player = c.player()
-            println(c.player().pos)
-            println(player.pos)
             player.world.createExplosion(
                 null, player.x, player.y + 1, player.z,
                 8.0f,
@@ -37,15 +35,12 @@ object ExplodeButton {
         }
     }
 
-    data class ExplodeKey(val ignored: String = "") : CustomPayload {
-        private constructor(buf: PacketByteBuf) : this(buf.readString())
-
-        private fun write(buf: PacketByteBuf) = buf.writeString(this.ignored)
+    class ExplodeKey() : CustomPayload {
+        private constructor(ignored: PacketByteBuf) : this()
         override fun getId(): CustomPayload.Id<ExplodeKey> = ID
 
         companion object {
-            val CODEC: PacketCodec<PacketByteBuf, ExplodeKey> =
-                CustomPayload.create({ payload, buf -> payload.write(buf) }, ::ExplodeKey)
+            val CODEC: PacketCodec<PacketByteBuf, ExplodeKey> = CustomPayload.create({ _, _ -> }, ::ExplodeKey)
             val ID: CustomPayload.Id<ExplodeKey> = CustomPayload.Id(id("explode_key"))
         }
     }
