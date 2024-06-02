@@ -2,9 +2,8 @@ package org.teamvoided.shippost.data.providers
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
-import net.minecraft.data.server.VanillaRecipesProvider
+import net.minecraft.block.Blocks
 import net.minecraft.data.server.recipe.*
-import net.minecraft.item.ItemConvertible
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.RecipeCategory
@@ -12,15 +11,20 @@ import net.minecraft.registry.HolderLookup
 import org.teamvoided.shippost.TheShipPostMod.gId
 import org.teamvoided.shippost.init.SpBlocks
 import org.teamvoided.shippost.init.SpItems
+import org.teamvoided.shippost.utils.*
 import java.util.concurrent.CompletableFuture
 
 class RecipeProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Provider>) : FabricRecipeProvider(o, r) {
 
     override fun generateRecipes(re: RecipeExporter) {
         craftingRecipes(re)
-        smelting(re)
         smithingRecipes(re)
-        stonecuttingRecipes(re)
+
+        // SKELET TIME
+        skelet(re)
+        // NO MORE SKELET
+        stairs(re)
+        jesseWeNeedToCook(re)
     }
 
     private fun craftingRecipes(c: RecipeExporter) {
@@ -59,38 +63,13 @@ class RecipeProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Prov
             .criterion(hasItem(SpItems.COPPER_SHORTSWORD), conditionsFromItem(SpItems.COPPER_SHORTSWORD))
             .offerTo(c, SpItems.COPPER_SHORTSWORD.gId)
 
-        ShapelessRecipeJsonFactory.create(RecipeCategory.MISC, SpItems.LEGAL_SUBSTANCE_CONCOCTION)
-            .ingredient(SpItems.LEGAL_SUBSTANCE)
-            .ingredient(SpItems.LEGAL_SUBSTANCE_TWO)
-            .ingredient(SpItems.LEGAL_SUBSTANCE_THREE)
-            .criterion(hasItem(SpItems.LEGAL_SUBSTANCE), conditionsFromItem(SpItems.LEGAL_SUBSTANCE))
-            .criterion(hasItem(SpItems.LEGAL_SUBSTANCE_TWO), conditionsFromItem(SpItems.LEGAL_SUBSTANCE_TWO))
-            .criterion(hasItem(SpItems.LEGAL_SUBSTANCE_THREE), conditionsFromItem(SpItems.LEGAL_SUBSTANCE_THREE))
-            .criterion(
-                hasItem(SpItems.LEGAL_SUBSTANCE_CONCOCTION),
-                conditionsFromItem(SpItems.LEGAL_SUBSTANCE_CONCOCTION)
-            )
-            .offerTo(c, SpItems.LEGAL_SUBSTANCE_CONCOCTION.gId)
-
-        // SKELET TIME
-        skelet(c)
-        // NO MORE SKELET
-        ShapedRecipeJsonFactory.create(RecipeCategory.BUILDING_BLOCKS, SpBlocks.SWAGGIEST_STAIRS, 4)
-            .pattern("B  ")
-            .pattern("BB ")
-            .pattern("BBB")
-            .ingCri('B', Items.NETHERITE_BLOCK)
-            .crit(SpBlocks.SWAGGIEST_STAIRS)
-            .offerTo(c, SpBlocks.SWAGGIEST_STAIRS.gId)
-    }
-
-    private fun smelting(c: RecipeExporter) {
-        CookingRecipeJsonFactory.createSmelting(
-            Ingredient.ofItems(SpItems.SKELETON), RecipeCategory.BUILDING_BLOCKS,
-            SpItems.WITHER_SKELETON.asItem(), 5f, 200
-        )
-            .criterion(hasItem(SpItems.WITHER_SKELETON), conditionsFromItem(SpItems.WITHER_SKELETON))
-            .offerTo(c)
+        ShapedRecipeJsonFactory.create(RecipeCategory.BUILDING_BLOCKS, SpBlocks.SUS_CONCRETE)
+            .pattern("R")
+            .pattern("C")
+            .ingredientCriterion('R', Blocks.RED_CONCRETE)
+            .ingredientCriterion('C', Blocks.CYAN_CONCRETE)
+            .criterion(SpBlocks.SUS_CONCRETE)
+            .offerTo(c, SpBlocks.SUS_CONCRETE.gId)
 
     }
 
@@ -122,24 +101,72 @@ class RecipeProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Prov
                 conditionsFromItem(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE)
             )
             .criterion(hasItem(Items.NETHERITE_INGOT), conditionsFromItem(Items.NETHERITE_INGOT))
-            .criterion(hasItem(SpItems.NETHERITE_COPPER_SHORTSWORD), conditionsFromItem(SpItems.NETHERITE_COPPER_SHORTSWORD))
+            .criterion(
+                hasItem(SpItems.NETHERITE_COPPER_SHORTSWORD),
+                conditionsFromItem(SpItems.NETHERITE_COPPER_SHORTSWORD)
+            )
             .offerTo(c, SpItems.NETHERITE_COPPER_SHORTSWORD.gId)
     }
 
-    private fun stonecuttingRecipes(c: RecipeExporter) {
-        VanillaRecipesProvider
-            .createStonecuttingRecipe(c, RecipeCategory.REDSTONE, SpBlocks.SWAGGIEST_STAIRS, Items.NETHERITE_BLOCK)
+    private fun swagCrafting(c: RecipeExporter) {
+        c.stairs(Blocks.EMERALD_BLOCK, SpBlocks.SWAGGY_STAIRS, SWAG_FOLDER)
+        c.stairs(Blocks.DIAMOND_BLOCK, SpBlocks.SWAGGIER_STAIRS, SWAG_FOLDER)
+        c.stairs(Blocks.NETHERITE_BLOCK, SpBlocks.SWAGGIEST_STAIRS, SWAG_FOLDER)
+
+
+        TransformSmithingRecipeJsonFactory.create(
+            Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE.toIngredient(),
+            SpBlocks.SWAGGIER_STAIRS.toIngredient(),
+            Items.NETHERITE_INGOT.toIngredient(),
+            RecipeCategory.MISC, SpBlocks.SWAGGIEST_STAIRS.asItem()
+        )
+            .criterion(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE)
+            .criterion(Items.NETHERITE_INGOT)
+            .criterion(SpBlocks.SWAGGIEST_STAIRS)
+            .offerTo(c, SpBlocks.SWAGGIEST_STAIRS.gId.withPrefix("smithing_").withPrefix(SWAG_FOLDER))
     }
 
-    fun ShapedRecipeJsonFactory.ingCri(c: Char, item: ItemConvertible): ShapedRecipeJsonFactory {
-        return this.ingredient(c, item).crit(item)
+    private fun stairs(c: RecipeExporter) {
+        swagCrafting(c)
+        c.stairs(Blocks.RED_CONCRETE, SpBlocks.RED_CONCRETE_STAIRS)
     }
 
-    fun ShapedRecipeJsonFactory.crit(item: ItemConvertible): ShapedRecipeJsonFactory {
-        return this.criterion(hasItem(item), conditionsFromItem(item))
+    @Suppress("MagicNumber")
+    private fun jesseWeNeedToCook(c: RecipeExporter) {
+        c.cooking(Items.SUGAR_CANE, SpItems.LEGAL_SUBSTANCE, 5f, 200, LEGAL_FOLDER)
+        CookingRecipeJsonFactory.create(
+            Items.TORCHFLOWER.toIngredient(),
+            RecipeCategory.FOOD,
+            SpItems.LEGAL_SUBSTANCE_TWO,
+            5f,
+            200,
+        )
+            .criterion(Items.TORCHFLOWER)
+            .criterion(SpItems.LEGAL_SUBSTANCE_TWO)
+            .offerTo(c, SpItems.LEGAL_SUBSTANCE_TWO.gId.withPrefix(LEGAL_FOLDER))
+
+        CookingRecipeJsonFactory.create(
+            Items.POTION.toIngredient(),
+            RecipeCategory.FOOD,
+            SpItems.LEGAL_SUBSTANCE_THREE,
+            15f,
+            400,
+        )
+            .criterion(Items.POTION)
+            .criterion(SpItems.LEGAL_SUBSTANCE_THREE)
+            .offerTo(c, SpItems.LEGAL_SUBSTANCE_THREE.gId.withPrefix(LEGAL_FOLDER))
+
+        ShapelessRecipeJsonFactory.create(RecipeCategory.FOOD, SpItems.LEGAL_SUBSTANCE_CONCOCTION)
+            .ingredientCriterion(SpItems.LEGAL_SUBSTANCE)
+            .ingredientCriterion(SpItems.LEGAL_SUBSTANCE_TWO)
+            .ingredientCriterion(SpItems.LEGAL_SUBSTANCE_THREE)
+            .criterion(SpItems.LEGAL_SUBSTANCE_CONCOCTION)
+            .offerTo(c, SpItems.LEGAL_SUBSTANCE_CONCOCTION.gId.withPrefix(LEGAL_FOLDER))
     }
 
-    fun skelet(c: RecipeExporter) {
+    private fun skelet(c: RecipeExporter) {
+        c.cooking(SpItems.SKELETON, SpItems.WITHER_SKELETON, 5f, 200, SKELET_FOLDER)
+
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.SANS)
             .pattern("X")
             .pattern("Y")
@@ -149,191 +176,197 @@ class RecipeProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Prov
             .ingredient('Z', Items.SOUL_LANTERN)
             .criterion(hasItem(SpItems.SKELETON), conditionsFromItem(SpItems.SKELETON))
             .criterion(hasItem(Items.DIAMOND_CHESTPLATE), conditionsFromItem(Items.DIAMOND_CHESTPLATE))
-            .offerTo(c, SpItems.SANS.gId)
+            .offerTo(c, SpItems.SANS.gId.withPrefix(SKELET_FOLDER))
 
         ShapelessRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.SKELETON)
             .ingredient(SpItems.SKELEON)
             .ingredient(Items.BONE)
             .criterion(hasItem(SpItems.SKELEON), conditionsFromItem(SpItems.SKELEON))
-            .offerTo(c, SpItems.SKELETON.gId)
+            .offerTo(c, SpItems.SKELETON.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.SKELEON)
             .pattern(" S ")
             .pattern("ATA")
             .pattern("L L")
-            .ingCri('S', SpItems.SKULL)
-            .ingCri('A', SpItems.ARM)
-            .ingCri('L', SpItems.LEG)
-            .ingCri('T', SpItems.TORSO)
-            .crit(SpItems.SKELEON)
-            .offerTo(c, SpItems.SKELEON.gId)
+            .ingredientCriterion('S', SpItems.SKULL)
+            .ingredientCriterion('A', SpItems.ARM)
+            .ingredientCriterion('L', SpItems.LEG)
+            .ingredientCriterion('T', SpItems.TORSO)
+            .criterion(SpItems.SKELEON)
+            .offerTo(c, SpItems.SKELEON.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.SKULL)
             .pattern("ECE")
             .pattern(" F ")
-            .ingCri('E', SpItems.EAR_BONES)
-            .ingCri('C', SpItems.CRANIUM)
-            .ingCri('F', SpItems.FACE)
-            .crit(SpItems.SKULL)
-            .offerTo(c, SpItems.SKULL.gId)
+            .ingredientCriterion('E', SpItems.EAR_BONES)
+            .ingredientCriterion('C', SpItems.CRANIUM)
+            .ingredientCriterion('F', SpItems.FACE)
+            .criterion(SpItems.SKULL)
+            .offerTo(c, SpItems.SKULL.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.ARM)
             .pattern("BBB")
             .pattern("B H")
             .pattern("B  ")
-            .ingCri('H', SpItems.HAND)
-            .ingCri('B', Items.BONE)
-            .crit(SpItems.ARM)
-            .offerTo(c, SpItems.ARM.gId)
+            .ingredientCriterion('H', SpItems.HAND)
+            .ingredientCriterion('B', Items.BONE)
+            .criterion(SpItems.ARM)
+            .offerTo(c, SpItems.ARM.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.LEG)
             .pattern("B  ")
             .pattern("B  ")
             .pattern("BBF")
-            .ingCri('F', SpItems.FOOT)
-            .ingCri('B', Items.BONE)
-            .crit(SpItems.LEG)
-            .offerTo(c, SpItems.LEG.gId)
+            .ingredientCriterion('F', SpItems.FOOT)
+            .ingredientCriterion('B', Items.BONE)
+            .criterion(SpItems.LEG)
+            .offerTo(c, SpItems.LEG.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.TORSO)
             .pattern("R")
             .pattern("S")
             .pattern("P")
-            .ingCri('R', SpItems.RIBCAGE)
-            .ingCri('S', SpItems.SPINE)
-            .ingCri('P', SpItems.PELVIS)
-            .crit(SpItems.TORSO)
-            .offerTo(c, SpItems.TORSO.gId)
+            .ingredientCriterion('R', SpItems.RIBCAGE)
+            .ingredientCriterion('S', SpItems.SPINE)
+            .ingredientCriterion('P', SpItems.PELVIS)
+            .criterion(SpItems.TORSO)
+            .offerTo(c, SpItems.TORSO.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.FACE)
             .pattern("FFF")
-            .ingCri('F', SpItems.FACE_PART)
-            .crit(SpItems.FACE)
-            .offerTo(c, SpItems.FACE.gId)
+            .ingredientCriterion('F', SpItems.FACE_PART)
+            .criterion(SpItems.FACE)
+            .offerTo(c, SpItems.FACE.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.HAND)
             .pattern("FFF")
             .pattern("FHT")
-            .ingCri('F', SpItems.FINGER)
-            .ingCri('T', SpItems.THUMB)
-            .ingCri('H', SpItems.HAND_BASE)
-            .crit(SpItems.HAND)
-            .offerTo(c, SpItems.HAND.gId)
+            .ingredientCriterion('F', SpItems.FINGER)
+            .ingredientCriterion('T', SpItems.THUMB)
+            .ingredientCriterion('H', SpItems.HAND_BASE)
+            .criterion(SpItems.HAND)
+            .offerTo(c, SpItems.HAND.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.FOOT)
             .pattern("TTT")
             .pattern("TBT")
-            .ingCri('T', SpItems.TOE)
-            .ingCri('B', SpItems.FOOT_BASE)
-            .crit(SpItems.FOOT)
-            .offerTo(c, SpItems.FOOT.gId)
+            .ingredientCriterion('T', SpItems.TOE)
+            .ingredientCriterion('B', SpItems.FOOT_BASE)
+            .criterion(SpItems.FOOT)
+            .offerTo(c, SpItems.FOOT.gId.withPrefix(SKELET_FOLDER))
 
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.SPINE)
             .pattern("SS ")
             .pattern(" S ")
             .pattern(" SS")
-            .ingCri('S', SpItems.SPINE_PART)
-            .crit(SpItems.SPINE)
-            .offerTo(c, SpItems.SPINE.gId)
+            .ingredientCriterion('S', SpItems.SPINE_PART)
+            .criterion(SpItems.SPINE)
+            .offerTo(c, SpItems.SPINE.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.RIBCAGE)
             .pattern("RBR")
-            .ingCri('R', SpItems.HALF_RIBCAGE)
-            .ingCri('B', Items.BONE)
-            .crit(SpItems.RIBCAGE)
-            .offerTo(c, SpItems.RIBCAGE.gId)
+            .ingredientCriterion('R', SpItems.HALF_RIBCAGE)
+            .ingredientCriterion('B', Items.BONE)
+            .criterion(SpItems.RIBCAGE)
+            .offerTo(c, SpItems.RIBCAGE.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.HALF_RIBCAGE)
             .pattern("R")
             .pattern("R")
-            .ingCri('R', SpItems.QUARTER_RIBCAGE)
-            .crit(SpItems.HALF_RIBCAGE)
-            .offerTo(c, SpItems.HALF_RIBCAGE.gId)
+            .ingredientCriterion('R', SpItems.QUARTER_RIBCAGE)
+            .criterion(SpItems.HALF_RIBCAGE)
+            .offerTo(c, SpItems.HALF_RIBCAGE.gId.withPrefix(SKELET_FOLDER))
 
         ShapelessRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.PELVIS)
             .ingredient(Items.BONE)
             .ingredient(Items.BONE)
             .criterion(hasItem(SpItems.PELVIS), conditionsFromItem(SpItems.PELVIS))
-            .offerTo(c, SpItems.PELVIS.gId)
+            .offerTo(c, SpItems.PELVIS.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.EAR_BONES)
             .pattern(" B ")
             .pattern("B  ")
             .pattern(" B ")
-            .ingCri('B', Items.BONE)
-            .crit(SpItems.EAR_BONES)
-            .offerTo(c, SpItems.EAR_BONES.gId)
+            .ingredientCriterion('B', Items.BONE)
+            .criterion(SpItems.EAR_BONES)
+            .offerTo(c, SpItems.EAR_BONES.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.THUMB)
             .pattern("B")
             .pattern("B")
             .pattern("B")
-            .ingCri('B', Items.BONE)
-            .crit(SpItems.THUMB)
-            .offerTo(c, SpItems.THUMB.gId)
+            .ingredientCriterion('B', Items.BONE)
+            .criterion(SpItems.THUMB)
+            .offerTo(c, SpItems.THUMB.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.FINGER)
             .pattern("BB ")
             .pattern("B  ")
             .pattern("B  ")
-            .ingCri('B', Items.BONE)
-            .crit(SpItems.FINGER)
-            .offerTo(c, SpItems.FINGER.gId)
+            .ingredientCriterion('B', Items.BONE)
+            .criterion(SpItems.FINGER)
+            .offerTo(c, SpItems.FINGER.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.TOE)
             .pattern("B  ")
             .pattern("B  ")
             .pattern("BB ")
-            .ingCri('B', Items.BONE)
-            .crit(SpItems.TOE)
-            .offerTo(c, SpItems.TOE.gId)
+            .ingredientCriterion('B', Items.BONE)
+            .criterion(SpItems.TOE)
+            .offerTo(c, SpItems.TOE.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.FACE_PART)
             .pattern("B B")
             .pattern("BBB")
-            .ingCri('B', Items.BONE)
-            .crit(SpItems.FACE_PART)
-            .offerTo(c, SpItems.FACE_PART.gId)
+            .ingredientCriterion('B', Items.BONE)
+            .criterion(SpItems.FACE_PART)
+            .offerTo(c, SpItems.FACE_PART.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.SPINE_PART)
             .pattern("BB ")
             .pattern(" B ")
             .pattern(" BB")
-            .ingCri('B', Items.BONE)
-            .crit(SpItems.SPINE_PART)
-            .offerTo(c, SpItems.SPINE_PART.gId)
+            .ingredientCriterion('B', Items.BONE)
+            .criterion(SpItems.SPINE_PART)
+            .offerTo(c, SpItems.SPINE_PART.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.QUARTER_RIBCAGE)
             .pattern("BBB")
             .pattern("BBB")
-            .ingCri('B', Items.BONE)
-            .crit(SpItems.QUARTER_RIBCAGE)
-            .offerTo(c, SpItems.QUARTER_RIBCAGE.gId)
+            .ingredientCriterion('B', Items.BONE)
+            .criterion(SpItems.QUARTER_RIBCAGE)
+            .offerTo(c, SpItems.QUARTER_RIBCAGE.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.FOOT_BASE)
             .pattern("BB")
             .pattern("BB")
             .pattern("BB")
-            .ingCri('B', Items.BONE)
-            .crit(SpItems.FOOT_BASE)
-            .offerTo(c, SpItems.FOOT_BASE.gId)
+            .ingredientCriterion('B', Items.BONE)
+            .criterion(SpItems.FOOT_BASE)
+            .offerTo(c, SpItems.FOOT_BASE.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.HAND_BASE)
             .pattern("B B")
             .pattern("BBB")
             .pattern("BBB")
-            .ingCri('B', Items.BONE)
-            .crit(SpItems.HAND_BASE)
-            .offerTo(c, SpItems.HAND_BASE.gId)
+            .ingredientCriterion('B', Items.BONE)
+            .criterion(SpItems.HAND_BASE)
+            .offerTo(c, SpItems.HAND_BASE.gId.withPrefix(SKELET_FOLDER))
 
         ShapedRecipeJsonFactory.create(RecipeCategory.REDSTONE, SpItems.CRANIUM)
             .pattern("BBB")
             .pattern("B B")
             .pattern("BBB")
-            .ingCri('B', Items.BONE)
-            .crit(SpItems.CRANIUM)
-            .offerTo(c, SpItems.CRANIUM.gId)
+            .ingredientCriterion('B', Items.BONE)
+            .criterion(SpItems.CRANIUM)
+            .offerTo(c, SpItems.CRANIUM.gId.withPrefix(SKELET_FOLDER))
+    }
+
+    companion object {
+        const val LEGAL_FOLDER = "legal_things/"
+        const val SKELET_FOLDER = "skelet/"
+        const val SWAG_FOLDER = "swag/"
     }
 
 }

@@ -10,7 +10,11 @@ class BlockLootTableProvider(o: FabricDataOutput, r: CompletableFuture<HolderLoo
     FabricBlockLootTableProvider(o, r) {
     private val selfDrop = listOf(
         SpBlocks.TEST_BLOCK,
-        SpBlocks.SWAGGIEST_STAIRS
+        SpBlocks.SUS_CONCRETE,
+        SpBlocks.RED_CONCRETE_STAIRS,
+        SpBlocks.SWAGGY_STAIRS,
+        SpBlocks.SWAGGIER_STAIRS,
+        SpBlocks.SWAGGIEST_STAIRS,
     )
 
     override fun generate() {
