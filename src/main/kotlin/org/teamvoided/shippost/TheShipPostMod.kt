@@ -6,10 +6,7 @@ import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.teamvoided.shippost.init.SpBlocks
-import org.teamvoided.shippost.init.SpEntities
-import org.teamvoided.shippost.init.SpItems
-import org.teamvoided.shippost.init.SpTabs
+import org.teamvoided.shippost.init.*
 import org.teamvoided.shippost.modules.*
 
 @Suppress("unused")
@@ -27,12 +24,14 @@ object TheShipPostMod {
         SpItems.init()
         SpBlocks.init()
         SpTabs.init()
+        SpComponents.init()
 
         BoneInjection.init()
         FatalStrike.inti()
         ExplodeButton.initCommon()
         RattleEmBoys.initCommon()
         SoundsLikeCheese.init()
+        Stickable.init()
     }
 
     fun clientInit() {
