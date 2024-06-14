@@ -1,10 +1,10 @@
-package org.teamvoided.shippost
+package org.teamvoided.shippost.data.gen
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
-import org.teamvoided.shippost.data.providers.*
-import org.teamvoided.shippost.data.providers.tags.BlockTagProvider
-import org.teamvoided.shippost.data.providers.tags.ItemTagProvider
+import org.teamvoided.shippost.data.gen.providers.*
+import org.teamvoided.shippost.data.gen.providers.tags.BlockTagProvider
+import org.teamvoided.shippost.data.gen.providers.tags.ItemTagProvider
 
 
 @Suppress("unused")
@@ -16,7 +16,7 @@ class TheShipPostData : DataGeneratorEntrypoint {
         pack.addProvider(::RecipeProvider)
         pack.addProvider(::AdvancementProvider)
         pack.addProvider(::BlockLootTableProvider)
-        pack.addProvider(::EnglishTranslationProvider)
+        pack.addProvider(::EnglishLangProvider)
 
         pack.addProvider(::BlockTagProvider)
         pack.addProvider(::ItemTagProvider)

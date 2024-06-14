@@ -1,4 +1,4 @@
-package org.teamvoided.shippost.data.providers
+package org.teamvoided.shippost.data.gen.providers
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider
@@ -28,7 +28,7 @@ class AdvancementProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup
                 Blocks.ORANGE_BANNER,
                 Text.translatable("advancements.story.root.title"),
                 Text.translatable("advancements.story.root.description"),
-                Identifier("textures/gui/advancements/backgrounds/stone.png"),
+                Identifier.ofDefault("textures/gui/advancements/backgrounds/stone.png"),
                 AdvancementType.TASK,
                 false,
                 false,

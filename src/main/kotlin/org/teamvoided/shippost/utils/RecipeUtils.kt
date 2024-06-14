@@ -7,8 +7,8 @@ import net.minecraft.data.server.recipe.*
 import net.minecraft.item.ItemConvertible
 import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.RecipeCategory
-import net.minecraft.util.Identifier
 import org.teamvoided.shippost.TheShipPostMod.gId
+import org.teamvoided.shippost.TheShipPostMod.id
 
 fun ShapedRecipeJsonFactory.ingredientCriterion(c: Char, item: ItemConvertible): ShapedRecipeJsonFactory {
     return this.ingredient(c, item).criterion(item)
@@ -78,7 +78,7 @@ fun RecipeExporter.customStonecutting(
         .criterion(
             hasItem(result), conditionsFromItem(result)
         )
-        .offerTo(this, Identifier("${id}_stonecutting").withPrefix(prefix))
+        .offerTo(this, id("${id}_stonecutting").withPrefix(prefix))
 }
 
 fun ItemConvertible.toIngredient(): Ingredient = Ingredient.ofItems(this)

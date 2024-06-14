@@ -3,7 +3,6 @@ package org.teamvoided.shippost.modules
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents
 import net.minecraft.advancement.Advancement
 import net.minecraft.server.network.ServerPlayerEntity
-import org.teamvoided.shippost.data.providers.AdvancementProvider.Companion.fatalStrike
 
 object FatalStrike {
     fun inti() {
@@ -11,7 +10,7 @@ object FatalStrike {
            if (killer is ServerPlayerEntity){
 //               println(killer.name)
 //               println(killer.uuid)
-               fatalStrike?.let { killer.grantAdvancement(it) }
+//               fatalStrike?.let { killer.grantAdvancement(it) }
            }
         }
     }

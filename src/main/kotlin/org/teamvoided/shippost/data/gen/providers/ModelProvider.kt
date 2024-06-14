@@ -1,4 +1,4 @@
-package org.teamvoided.shippost.data.providers
+package org.teamvoided.shippost.data.gen.providers
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider

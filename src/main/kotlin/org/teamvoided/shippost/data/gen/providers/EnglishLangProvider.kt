@@ -1,4 +1,4 @@
-package org.teamvoided.shippost.data.providers
+package org.teamvoided.shippost.data.gen.providers
 
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -11,7 +11,7 @@ import org.teamvoided.shippost.TheShipPostMod.gId
 import org.teamvoided.shippost.init.SpItems.ITEM_LIST
 import java.util.concurrent.CompletableFuture
 
-class EnglishTranslationProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Provider>) :
+class EnglishLangProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Provider>) :
     FabricLanguageProvider(o, "en_us", r) {
     override fun generateTranslations(priovider: HolderLookup.Provider, gen: TranslationBuilder) {
 

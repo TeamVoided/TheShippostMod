@@ -1,4 +1,4 @@
-package org.teamvoided.shippost.data.providers
+package org.teamvoided.shippost.data.gen.providers
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
@@ -63,7 +63,7 @@ class RecipeProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Prov
             .criterion(hasItem(SpItems.COPPER_SHORTSWORD), conditionsFromItem(SpItems.COPPER_SHORTSWORD))
             .offerTo(c, SpItems.COPPER_SHORTSWORD.gId)
 
-        ShapedRecipeJsonFactory.create(RecipeCategory.BUILDING_BLOCKS, SpBlocks.SUS_CONCRETE)
+        ShapedRecipeJsonFactory.create(RecipeCategory.BUILDING_BLOCKS, SpBlocks.SUS_CONCRETE, 2)
             .pattern("R")
             .pattern("C")
             .ingredientCriterion('R', Blocks.RED_CONCRETE)

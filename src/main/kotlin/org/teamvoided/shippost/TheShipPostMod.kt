@@ -13,7 +13,7 @@ import org.teamvoided.shippost.modules.*
 object TheShipPostMod {
     const val MODID: String = "shippost"
     val LOG: Logger = LoggerFactory.getLogger(MODID)
-    fun id(path: String): Identifier = Identifier(MODID, path)
+    fun id(path: String): Identifier = Identifier.of(MODID, path)
     val Item.gId get() = Registries.ITEM.getId(this)
     val Block.gId get() = Registries.BLOCK.getId(this)
 
