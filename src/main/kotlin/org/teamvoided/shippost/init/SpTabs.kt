@@ -17,7 +17,7 @@ object SpTabs {
             Registries.ITEM_GROUP,
             SHIPPOST_TAB,
             FabricItemGroup.builder()
-                .icon { SpItems.TEST.defaultStack }
+                .icon { SpItems.ITEM_LIST.random() }
                 .name(Text.of("Your mother+"))
                 .entries { _, entries ->
                     entries.addStacks(SpItems.ITEM_LIST.shuffled())

@@ -18,7 +18,6 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
     private fun pickaxeMineable() = getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
         .add(
-            SpBlocks.TEST_BLOCK,
             SpBlocks.SUS_CONCRETE,
             SpBlocks.RED_CONCRETE_STAIRS,
             SpBlocks.SWAGGY_STAIRS,

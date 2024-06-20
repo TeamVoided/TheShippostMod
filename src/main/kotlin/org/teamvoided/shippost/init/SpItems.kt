@@ -19,8 +19,6 @@ object SpItems {
     val itemsToModel = LinkedList<Item>()
     fun set() = Item.Settings()
 
-    val TEST: Item = register("test", BoneItem(set()))
-
     val SKELEON: Item = register("skeleon", BoneItem(set()))
 
     val SANS: Item = register("sans", BoneItem(set()))

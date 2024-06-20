@@ -2,6 +2,7 @@ package org.teamvoided.shippost.data.gen.providers
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
+import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.data.client.ItemModelGenerator
 import net.minecraft.data.client.model.BlockStateModelGenerator
@@ -25,9 +26,7 @@ class ModelProvider(output: FabricDataOutput?) : FabricModelProvider(output) {
         SpBlocks.RED_CONCRETE_STAIRS to Blocks.RED_CONCRETE,
     )
 
-    val cubes = listOf(
-        SpBlocks.TEST_BLOCK,
-    )
+    val cubes = listOf<Block>()
 
     override fun generateBlockStateModels(gen: BlockStateModelGenerator) {
         cubes.forEach { gen.registerSimpleCubeAll(it) }

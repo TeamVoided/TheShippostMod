@@ -16,8 +16,6 @@ object SpBlocks {
     fun init() {}
     val BLOCK_LIST = LinkedList<Block>()
 
-    val TEST_BLOCK: Block = registerWithItem("test_block", Block(AbstractBlock.Settings.create()))
-
     val SUS_CONCRETE = registerWithItem("sus_concrete", Block(AbstractBlock.Settings.copy(Blocks.RED_CONCRETE)))
 
     // Stairs

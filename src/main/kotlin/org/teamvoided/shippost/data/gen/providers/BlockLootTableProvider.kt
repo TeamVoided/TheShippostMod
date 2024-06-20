@@ -9,7 +9,6 @@ import java.util.concurrent.CompletableFuture
 class BlockLootTableProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Provider>) :
     FabricBlockLootTableProvider(o, r) {
     private val selfDrop = listOf(
-        SpBlocks.TEST_BLOCK,
         SpBlocks.SUS_CONCRETE,
         SpBlocks.RED_CONCRETE_STAIRS,
         SpBlocks.SWAGGY_STAIRS,
