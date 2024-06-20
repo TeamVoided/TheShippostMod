@@ -70,6 +70,8 @@ object SpItems {
             tooltip.add(Text.translatable("item.$MODID.bible.tooltip_3").formatted(Formatting.GRAY))
         })
 
+    val GROWING_PILLS: Item = register("growing_pills", SizePills(0.01, set()))
+    val SHRINKING_PILLS: Item = register("shrinking_pills", SizePills(-0.01, set()))
 
     //NON Stackable
     val COPPER_SHORTSWORD: Item = register(
