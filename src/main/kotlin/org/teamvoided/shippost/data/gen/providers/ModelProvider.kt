@@ -16,7 +16,7 @@ import org.teamvoided.shippost.utils.topBottomSides
 
 class ModelProvider(output: FabricDataOutput?) : FabricModelProvider(output) {
     private val tools = listOf(SpItems.COPPER_SHORTSWORD, SpItems.NETHERITE_COPPER_SHORTSWORD)
-    private val itemEx = listOf(SpItems.BIBLE) + tools
+    private val excludedItems = listOf(SpItems.BIBLE) + tools
 
     val stairs = listOf(
         SpBlocks.SWAGGY_STAIRS to Blocks.EMERALD_BLOCK,
@@ -45,7 +45,7 @@ class ModelProvider(output: FabricDataOutput?) : FabricModelProvider(output) {
         tools.forEach { gen.register(it, Models.HANDHELD) }
 
         itemsToModel.forEach {
-            if (!itemEx.contains(it))
+            if (!excludedItems.contains(it))
                 gen.register(it, Models.SINGLE_LAYER_ITEM)
         }
     }

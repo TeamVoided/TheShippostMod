@@ -14,7 +14,7 @@ object RattleEmBoys {
             val random = world.random
             if (!world.isClient
                 && isSkelet(entity.type)
-                && random.range(0, 10) == 0
+                && random.range(0, 100) == 0
             ) {
                 player.sendSystemMessage(Text.of("Rattle em boys"))
                 world.playSound(
