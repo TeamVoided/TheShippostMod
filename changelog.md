@@ -1,0 +1,18 @@
+- netherite copper shortsword
+- sus concrete
+- added red concrete stairs
+- swaggy stairs (emerald stairs)
+- swaggier stairs (diamond stairs)
+- swaggiest stairs can be crafted with a swaggy stairs & an upgrade template
+- new advancement for collecting all the swaggy stairs
+- growing & shrinking pills
+- skeleton part textures
+- legal substance recipes
+- bells are now edible
+- Rattle em bois not racist (It works with all skeleton variants)
+- stickable module:
+  - when right click with a "stick" item an effect happens :
+    - stick like item - it will break and give you 2 of it
+    - blaze rod - it will set you on fire
+    - breeze rod - it will spawn a breeze explosion
+    - firework - it will explode

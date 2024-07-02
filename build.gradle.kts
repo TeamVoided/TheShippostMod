@@ -101,6 +101,7 @@ uploadConfig {
     modrinthId = modrinth_id
     curseId = curse_id
 
+    changeLog = File("changelog.md").readText()
     // FabricApi
     modrinthDependency("P7dR8mSH", uploadConfig.REQUIRED)
     curseDependency("fabric-api", uploadConfig.REQUIRED)
