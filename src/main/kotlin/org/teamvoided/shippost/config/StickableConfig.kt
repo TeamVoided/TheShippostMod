@@ -13,6 +13,7 @@ object StickableConfig {
     )
     val STICKABLE_EXPLOSIVE = listOf(Items.FIREWORK_ROCKET)
     val STICKABLE_FLAMMABLE = listOf(Items.BLAZE_ROD)
+    val STICKABLE_BREEZY = listOf(Items.BREEZE_ROD)
 
     val flammableLength = 100
 }

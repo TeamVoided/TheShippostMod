@@ -14,10 +14,13 @@ import net.minecraft.util.collection.IdListUtil.OutOfBoundsHandler
 import java.util.function.Consumer
 import java.util.function.IntFunction
 
+@Suppress("MagicNumber")
 enum class StickableComponent(val id: Int) : StringIdentifiable, TooltipAppender {
     STICKABLE(0),
     STICKABLE_EXPLOSIVE(1),
-    STICKABLE_FLAMMABLE(2);
+    STICKABLE_FLAMMABLE(2),
+    STICKABLE_BREEZY(3);
+
 
     override fun asString(): String = name.lowercase()
 

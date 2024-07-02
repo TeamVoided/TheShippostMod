@@ -2,13 +2,16 @@ package org.teamvoided.shippost.modules
 
 import net.fabricmc.fabric.api.event.player.UseItemCallback
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents
+import net.minecraft.entity.projectile.WindChargeProjectileEntity
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.registry.Registries
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.TypedActionResult
-import net.minecraft.world.World
+import net.minecraft.world.World.ExplosionSourceType
 import org.teamvoided.shippost.config.StickableConfig
 import org.teamvoided.shippost.config.StickableConfig.STICKABLE
+import org.teamvoided.shippost.config.StickableConfig.STICKABLE_BREEZY
 import org.teamvoided.shippost.config.StickableConfig.STICKABLE_EXPLOSIVE
 import org.teamvoided.shippost.config.StickableConfig.STICKABLE_FLAMMABLE
 import org.teamvoided.shippost.init.SpComponents
@@ -24,6 +27,8 @@ object Stickable {
                     StickableComponent.STICKABLE_EXPLOSIVE
                 } else if (STICKABLE.contains(item)) {
                     StickableComponent.STICKABLE
+                } else if (STICKABLE_BREEZY.contains(item)) {
+                    StickableComponent.STICKABLE_BREEZY
                 } else null
 
                 data?.let { data1 -> c.modify(item) { it.put(SpComponents.STICKABLE, data1) } }
@@ -48,13 +53,31 @@ object Stickable {
                             world.createExplosion(
                                 null, player.x, player.y + 1, player.z,
                                 2.0f,
-                                World.ExplosionSourceType.NONE
+                                ExplosionSourceType.NONE
                             )
                             if (!isCreative) stack.decrement(1)
                         }
 
                         StickableComponent.STICKABLE_FLAMMABLE -> {
                             player.fireTicks += StickableConfig.flammableLength
+                            if (!isCreative) stack.decrement(1)
+                        }
+
+                        StickableComponent.STICKABLE_BREEZY -> {
+                            world.createExplosion(
+                                player,
+                                null,
+                                WindChargeProjectileEntity.field_50137,
+                                player.x,
+                                player.y,
+                                player.z,
+                                2.0f,
+                                false,
+                                ExplosionSourceType.TRIGGER,
+                                ParticleTypes.GUST_EMITTER_SMALL,
+                                ParticleTypes.GUST_EMITTER_LARGE,
+                                SoundEvents.ENTITY_BREEZE_WIND_BURST
+                            )
                             if (!isCreative) stack.decrement(1)
                         }
                     }
